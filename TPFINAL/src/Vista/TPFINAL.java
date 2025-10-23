@@ -37,18 +37,21 @@ public class TPFINAL {
         SD.crearSala(s2);
         SD.crearSala(s3); */
         
-        
+        /* FUNCIONA */
         SD.deshabilitarSala(2);
-        System.out.println("Se deshabilito la sala");
+        System.out.println("Se deshabilito la sala"); 
+       
         SD.habilitarSala(3);
-        System.out.println("Se habilito");
+        System.out.println("Se habilito"); 
         
         
-        Sala salita = SD.buscarSala(1);
-        salita.toString();
+      Sala salita = SD.buscarSala(3);
+   
+        System.out.println(salita.toString()); 
         
-       Sala modificarSala = new Sala(3, true, 120, true);
-       SD.modificarSala(modificarSala);
+        
+       Sala modificarSala1 = new Sala(1, true, 120, true); 
+       SD.modificarSala(modificarSala1); 
       
     }
     

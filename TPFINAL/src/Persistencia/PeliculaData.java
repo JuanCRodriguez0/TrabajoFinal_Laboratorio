@@ -44,7 +44,7 @@ public class PeliculaData {
             ps.setString(3, pelicula.getActores());
             ps.setString(4, pelicula.getOrigen());
             ps.setString(5, pelicula.getGenero());
-            ps.setDate(6, pelicula.getEstreno()); //No me acuerdo como iba en caso de Date
+            ps.setDate(6, Date.valueOf(pelicula.getEstreno())); 
             ps.setBoolean(7, pelicula.isEnCartelera());
             
           

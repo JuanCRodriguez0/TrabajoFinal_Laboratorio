@@ -25,7 +25,7 @@ public class SalaData {
     }
 
     public void habilitarSala(int id) {
-        String sql = "UPDATE sala SET estado =  WHERE nroSala = ?";
+        String sql = "UPDATE sala SET estado = 1 WHERE nroSala = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -60,10 +60,10 @@ public class SalaData {
     }
 
     public void modificarSala(Sala sala) {
-        String sql = "UPDATE sala SET apta3D=? ,capacidad= ? ,estado=? WHERE nroSala = ? ";
+        String sql = "UPDATE sala SET apta3D = ? ,capacidad = ? , estado = ? WHERE nroSala = ? ";
 
         try {
-            PreparedStatement ps = con.prepareCall(sql);
+            PreparedStatement ps = con.prepareStatement(sql);
             
             ps.setBoolean(1, sala.isApta3D());
             ps.setInt(2, sala.getCapacidad());
