@@ -10,7 +10,14 @@ import java.sql.SQLException;
 
 /**
  *
- * @author jerem
+ * Grupo 11:
+ * 
+ * Mauricio Reta
+ * Agustin Mazza
+ * Juan Cruz ROdriguez
+ * Jeremias Hoyo
+ * Facundo Cozzela
+ * Jeremias Sirur Flores
  */
 public class TPFINAL {
 
