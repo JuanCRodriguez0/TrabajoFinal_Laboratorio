@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-/**
- *
- * @author
- */
 public class Pelicula {
-    
+    private int idPelicula; //SI O NO
     private String titulo;
     private String director;
     private String actores;
@@ -20,10 +11,10 @@ public class Pelicula {
     private String genero;
     private LocalDate estreno;
     private boolean enCartelera;
-
+    
     public Pelicula() {
     }
-
+    
     public Pelicula(String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
         this.titulo = titulo;
         this.director = director;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package Vista;
 
 import Modelo.Sala;
@@ -21,9 +17,6 @@ import java.sql.SQLException;
  */
 public class TPFINAL {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws SQLException {
         // int nroSala, boolean apta3D, int capacidad, boolean estado
         Sala s1 = new Sala (1, true , 170, true );
@@ -38,7 +31,7 @@ public class TPFINAL {
         SD.crearSala(s3); */
         
         /* FUNCIONA */
-        SD.deshabilitarSala(2);
+        SD.deshabilitarSala(3);
         System.out.println("Se deshabilito la sala"); 
        
         SD.habilitarSala(3);
