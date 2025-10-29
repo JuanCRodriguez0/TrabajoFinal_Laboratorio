@@ -33,11 +33,12 @@ public class SalaData {
             ps.setInt(1, id);
             int n = ps.executeUpdate();
             if (n == 1) {
-                JOptionPane.showMessageDialog(null, "Sala habilitada con exito.");
+                JOptionPane.showMessageDialog(null, "Sala habilitada con éxito.");
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla sala.");
+            System.err.println("Error al intentar habilitar sala: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Sala.");
         }
     }
 
@@ -49,10 +50,11 @@ public class SalaData {
             ps.setInt(1, id);
             int n = ps.executeUpdate();
             if (n == 1) {
-                JOptionPane.showMessageDialog(null, "Sala Deshabilitada con exito.");
+                JOptionPane.showMessageDialog(null, "Sala deshabilitada con éxito.");
             }
 
         } catch (SQLException ex) {
+            System.err.println("Error al intentar deshabilitar sala: " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Sala.");
         }
 
@@ -70,10 +72,11 @@ public class SalaData {
 
             int n = ps.executeUpdate();
             if (n == 1) {
-                JOptionPane.showMessageDialog(null, "Sala modificada con exito.");
+                JOptionPane.showMessageDialog(null, "Sala modificada con éxito.");
             }
 
         } catch (SQLException ex) {
+            System.err.println("Error al modificar sala: " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Sala.");
         }
 
@@ -93,12 +96,13 @@ public class SalaData {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     sala.setNroSala(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Sala creada con exito.");
+                    JOptionPane.showMessageDialog(null, "Sala creada con éxito (ID " + sala.getNroSala() + ").");
                 }
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla sala.");
+            System.err.println("Error al crear sala: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Sala.");
         }
 
     }
@@ -107,7 +111,7 @@ public class SalaData {
         String sql = "SELECT apta3D, capacidad FROM sala WHERE nroSala = ? AND estado = 1";
         Sala sala = null;
 
-        try (PreparedStatement ps = con.prepareStatement(sql);) {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -120,11 +124,12 @@ public class SalaData {
                     sala.setEstado(true);
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "sala con nroSala " + id + " no encontrado.");
+                    JOptionPane.showMessageDialog(null, "Sala con ID " + id + " no encontrada.");
                 }
             }
 
         } catch (SQLException ex) {
+            System.err.println("Error al acceder a la sala: " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Sala.");
         }
 

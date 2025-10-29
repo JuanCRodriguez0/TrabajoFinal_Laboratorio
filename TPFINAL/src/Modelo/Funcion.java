@@ -27,6 +27,14 @@ public class Funcion {
         this.precioDelLugar = precioDelLugar;
     }
 
+    public int getIdFuncion() {
+        return idFuncion;
+    }
+
+    public void setIdFuncion(int idFuncion) {
+        this.idFuncion = idFuncion;
+    }
+
     public String getIdioma() {
         return idioma;
     }

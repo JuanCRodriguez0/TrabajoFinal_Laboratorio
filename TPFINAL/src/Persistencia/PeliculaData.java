@@ -25,9 +25,9 @@ public class PeliculaData {
         con = Conexion.getConexion();
     }
 
-    public void crearPelicula(Pelicula pelicula) { // esto sería "dar de alta la película"
-        String sql = "INSERT INTO sala(titulo, director, actores, origen, genero, estreno, enCartelera) "
-                + "VALUES (? ,? ,? ,? ,? ,? ,? ,?)";
+    public void crearPelicula(Pelicula pelicula) {
+        String sql = "INSERT INTO pelicula(titulo, director, actores, origen, genero, estreno, enCartelera) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -43,13 +43,14 @@ public class PeliculaData {
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
-                    pelicula.setTitulo(rs.getString(1));
-                    JOptionPane.showMessageDialog(null, "Pelicula creada con exito.");
+                    pelicula.setIdPelicula(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Película creada con éxito (ID " + pelicula.getIdPelicula() + ").");
                 }
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pelicula.");
+            System.err.println("Error al crear pelicula: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Película.");
         }
 
     }
@@ -62,11 +63,12 @@ public class PeliculaData {
             ps.setInt(1, id);
             int n = ps.executeUpdate();
             if (n == 1) {
-                JOptionPane.showMessageDialog(null, "Pelicula habilitada con exito.");
+                JOptionPane.showMessageDialog(null, "Película habilitada con éxito.");
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pelicula.");
+            System.err.println("Error al habilitar pelicula: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Película.");
         }
     }
 
@@ -78,11 +80,12 @@ public class PeliculaData {
             ps.setInt(0, id);
             int n = ps.executeUpdate();
             if (n == 0) {
-                JOptionPane.showMessageDialog(null, "Pelicula deshabilitada con exito.");
+                JOptionPane.showMessageDialog(null, "Película deshabilitada con éxito.");
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla pelicula.");
+            System.err.println("Error al deshabilitar pelicula: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Película.");
         }
     }
 
@@ -104,12 +107,13 @@ public class PeliculaData {
                     pelicula.setGenero(rs.getString("genero"));
                     pelicula.setEstreno(rs.getDate("estreno").toLocalDate());
                 } else {
-                    JOptionPane.showMessageDialog(null, "Pelicula con idPelicula " + id + " no encontrada.");
+                    JOptionPane.showMessageDialog(null, "Película con ID " + id + " no encontrada.");
                 }
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pelicula");
+            System.err.println("Error al buscar pelicula: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Película");
         }
 
         return pelicula;
@@ -134,15 +138,15 @@ public class PeliculaData {
             ps.setString(3, pelicula.getActores());
             ps.setString(4, pelicula.getOrigen());
             ps.setString(5, pelicula.getGenero());
-            ps.setDate(6, java.sql.Date.valueOf(pelicula.getEstreno())); // corregido esto y
-            ps.setBoolean(7, pelicula.isEnCartelera()); // esto
+            ps.setDate(6, java.sql.Date.valueOf(pelicula.getEstreno())); // corregido esto
+            ps.setBoolean(7, pelicula.isEnCartelera()); // y esto
             ps.setInt(8, pelicula.getIdPelicula()); // y agregado esto que faltaba y no nos dimos cuenta xd
 
             int n = ps.executeUpdate();
             if (n > 0) { // supuestamente es mejor checkear si n > 0 por si actualiza más de una fila por error (no me pregunten cómo lo sé (?)
                 JOptionPane.showMessageDialog(null, "Película modificada con éxito.");
             } else {
-                JOptionPane.showMessageDialog(null, "No se encontró película para modificar.");
+                JOptionPane.showMessageDialog(null, "No se encontró película a modificar.");
             }
 
         } catch (SQLException e) {
