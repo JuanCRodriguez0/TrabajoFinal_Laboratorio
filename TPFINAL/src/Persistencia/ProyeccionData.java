@@ -1,7 +1,7 @@
 package Persistencia;
 
 import Modelo.Conexion;
-import Modelo.Funcion;
+import Modelo.Proyeccion;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,20 +15,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 /* @author Grupo 11 */
-public class FuncionData {
+public class ProyeccionData {
 
     private Connection con = null;
 
-    public FuncionData() throws SQLException {
+    public ProyeccionData() throws SQLException {
         con = Conexion.getConexion();
     }
 
-    public void crearFuncion(Funcion funcion) {
-        String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public void crearFuncion(Proyeccion funcion) {
+        String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, nroSala, idPelicula) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            /* dato: el Statement.RETURN_GENERATED_KEYS lo que hace es devolver el ID auto-incremental que se
-                le haya asignado en la base de datos al objeto que se esté creando, por eso se usa en los métodos de crear. */
+            
 
             ps.setString(1, funcion.getIdioma());
             ps.setBoolean(2, funcion.isEs3D());
@@ -37,14 +36,17 @@ public class FuncionData {
             ps.setDate(5, java.sql.Date.valueOf(funcion.getHoraFin()));
             ps.setInt(6, funcion.getLugaresDisponibles());
             ps.setDouble(7, funcion.getPrecioDelLugar());
+            ps.setInt(8, funcion.getPelicula().getIdPelicula());
+            ps.setInt(9, funcion.getSala().getNroSala());
+            
 
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
-                // dato: por ende, el ps.getGeneratedKeys() obtiene ("gettea", deau) ese ID auto-incremental.
+                
                 if (rs.next()) {
-                    funcion.setIdFuncion(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Función creada con éxito (ID " + funcion.getIdFuncion() + ").");
+                    funcion.setCodProyeccion(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Función creada con éxito (ID " + funcion.getCodProyeccion()+ ").");
                 }
             }
 
@@ -74,7 +76,7 @@ public class FuncionData {
         }
     }
 
-    public void modificarFuncion(Funcion funcion) {
+    public void modificarFuncion(Proyeccion funcion) {
         String sql = "UPDATE proyeccion SET idioma = ?, es3D = ?, subtitulada = ?, horaInicio = ?, horaFin = ?, lugaresDisponibles = ?, precioDelLugar = ? WHERE codProyeccion = ? ";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -86,7 +88,7 @@ public class FuncionData {
             ps.setDate(4, java.sql.Date.valueOf(funcion.getHoraFin()));
             ps.setInt(6, funcion.getLugaresDisponibles());
             ps.setDouble(7, funcion.getPrecioDelLugar());
-            ps.setInt(8, funcion.getIdFuncion());
+            ps.setInt(8, funcion.getCodProyeccion());
 
             int eU = ps.executeUpdate();
 
@@ -101,4 +103,7 @@ public class FuncionData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Función.");
         }
     }
+    
+   
+    
 }

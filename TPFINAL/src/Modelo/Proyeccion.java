@@ -2,8 +2,8 @@ package Modelo;
 
 import java.time.LocalDate;
 
-public class Funcion {
-    private int idFuncion;
+public class Proyeccion {
+    private int codProyeccion;
     private Pelicula pelicula;
     private Sala sala;
     private String idioma;
@@ -14,10 +14,10 @@ public class Funcion {
     private int lugaresDisponibles;
     private double precioDelLugar;
 
-    public Funcion() {
+    public Proyeccion() {
     }
 
-    public Funcion(String idioma, boolean es3D, boolean subtitulada, LocalDate horaInicio, LocalDate horaFin, int lugaresDisponibles, double precioDelLugar) {
+    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, LocalDate horaInicio, LocalDate horaFin, int lugaresDisponibles, double precioDelLugar) {
         this.idioma = idioma;
         this.es3D = es3D;
         this.subtitulada = subtitulada;
@@ -27,13 +27,33 @@ public class Funcion {
         this.precioDelLugar = precioDelLugar;
     }
 
-    public int getIdFuncion() {
-        return idFuncion;
+    public Pelicula getPelicula() {
+        return pelicula;
     }
 
-    public void setIdFuncion(int idFuncion) {
-        this.idFuncion = idFuncion;
+    public void setPelicula(Pelicula pelicula) {
+        this.pelicula = pelicula;
     }
+
+    public Sala getSala() {
+        return sala;
+    }
+
+    public void setSala(Sala sala) {
+        this.sala = sala;
+    }
+
+    public int getCodProyeccion() {
+        return codProyeccion;
+    }
+
+    public void setCodProyeccion(int codProyeccion) {
+        this.codProyeccion = codProyeccion;
+    }
+
+   
+
+    
 
     public String getIdioma() {
         return idioma;
@@ -93,8 +113,12 @@ public class Funcion {
 
     @Override
     public String toString() {
-        return "Funcion{" + "idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + '}';
+        return "Proyeccion{" + "codProyeccion=" + codProyeccion + ", pelicula=" + pelicula + ", sala=" + sala + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + '}';
     }
+
+   
+
+    
     
     
 }

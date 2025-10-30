@@ -3,7 +3,7 @@ package Modelo;
 import java.time.LocalDate;
 
 public class Pelicula {
-    private int idPelicula; // supongo que SI (O NO)
+    private int idPelicula; 
     private String titulo;
     private String director;
     private String actores;
@@ -14,17 +14,19 @@ public class Pelicula {
     
     public Pelicula() {
     }
-    
-    public Pelicula(String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
+
+    public Pelicula(int idPelicula, String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
+        this.idPelicula = idPelicula;
         this.titulo = titulo;
         this.director = director;
         this.actores = actores;
         this.origen = origen;
         this.genero = genero;
-        this.estreno = estreno;
+        this.estreno = estreno; 
         this.enCartelera = enCartelera;
     }
-
+    
+  
     public int getIdPelicula() {
         return idPelicula;
     }
