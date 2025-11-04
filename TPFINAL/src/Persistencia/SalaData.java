@@ -61,14 +61,13 @@ public class SalaData {
     }
 
     public void modificarSala(Sala sala) {
-        String sql = "UPDATE sala SET apta3D = ? ,capacidad = ? , estado = ? WHERE nroSala = ? ";
+        String sql = "UPDATE sala SET apta3D = ? , estado = ? WHERE nroSala = ? ";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setBoolean(1, sala.isApta3D());
-            ps.setInt(2, sala.getCapacidad());
-            ps.setBoolean(3, sala.isEstado());
-            ps.setInt(4, sala.getNroSala());
+            ps.setBoolean(2, sala.isEstado());
+            ps.setInt(3, sala.getNroSala());
 
             int n = ps.executeUpdate();
             if (n == 1) {

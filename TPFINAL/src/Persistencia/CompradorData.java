@@ -16,19 +16,15 @@ import java.sql.Date;
 import java.util.HashSet;
 /**
  *
- * @author jerem
+ *
  */
 public class CompradorData {
     
-
-
     private Connection con = null;
 
     public CompradorData() throws SQLException {
         con = Conexion.getConexion();
     }
-    
-    
     
         public void crearComprador(Comprador comprador){
          String sql = "INSERT INTO comprador (dni, nombre, fechaNac, password, medioDePago) VALUES (?,?,?,?,?)";
@@ -57,7 +53,6 @@ public class CompradorData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Comprador.");
          }
             
-            
         }
     
         
@@ -81,8 +76,7 @@ public class CompradorData {
                     JOptionPane.showMessageDialog(null, "Comprador con dni " + id + " no encontrado."); 
                  }
                  
-                 
-                    
+                
                 }
                 
                 
@@ -92,14 +86,41 @@ public class CompradorData {
             }
             
             return comprador;
-            
         }
         
+        public void habilitarComprador(int id) {
+        String sql = "UPDATE comprador SET estado= 1 WHERE dni = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            int n = ps.executeUpdate();
+            if (n == 1) {
+                JOptionPane.showMessageDialog(null, "Comprador habilitado con éxito.");
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error al intentar habilitar comprador: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comprador.");
+        }
+    }
+        public void deshabilitarComprador(int id) {
+        String sql = "UPDATE comprador SET estado= 0 WHERE dni = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            int n = ps.executeUpdate();
+            if (n == 1) {
+                JOptionPane.showMessageDialog(null, "Comprador deshabilitado con éxito.");
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error al intentar deshabilitar comprador: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comprador.");
+        }
+    }
         
-       
         
-        
-        
-        
-        
+             
 }

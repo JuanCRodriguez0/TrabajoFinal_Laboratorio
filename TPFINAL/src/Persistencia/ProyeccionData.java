@@ -77,18 +77,18 @@ public class ProyeccionData {
     }
 
     public void modificarFuncion(Proyeccion funcion) {
-        String sql = "UPDATE proyeccion SET idioma = ?, es3D = ?, subtitulada = ?, horaInicio = ?, horaFin = ?, lugaresDisponibles = ?, precioDelLugar = ? WHERE codProyeccion = ? ";
+        String sql = "UPDATE proyeccion SET idioma = ?, es3D = ?, subtitulada = ?, precioDelLugar = ? WHERE codProyeccion = ? ";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, funcion.getIdioma());
             ps.setBoolean(2, funcion.isEs3D());
             ps.setBoolean(3, funcion.isSubtitulada());
-            ps.setDate(4, java.sql.Date.valueOf(funcion.getHoraInicio()));
+            /*ps.setDate(4, java.sql.Date.valueOf(funcion.getHoraInicio()));
             ps.setDate(4, java.sql.Date.valueOf(funcion.getHoraFin()));
-            ps.setInt(6, funcion.getLugaresDisponibles());
-            ps.setDouble(7, funcion.getPrecioDelLugar());
-            ps.setInt(8, funcion.getCodProyeccion());
+            ps.setInt(4, funcion.getLugaresDisponibles());*/
+            ps.setDouble(4, funcion.getPrecioDelLugar());
+            ps.setInt(5, funcion.getCodProyeccion());
 
             int eU = ps.executeUpdate();
 
