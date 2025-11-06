@@ -99,7 +99,7 @@ public class PeliculaData {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     pelicula = new Pelicula();
-                    pelicula.setIdPelicula(id); 
+                    pelicula.setIdPelicula(id);
                     pelicula.setTitulo(rs.getNString("titulo"));
                     pelicula.setDirector(rs.getString("director"));
                     pelicula.setActores(rs.getString("actores"));
@@ -122,7 +122,6 @@ public class PeliculaData {
     public void modificarPelicula(Pelicula pelicula) {
         String sql = "UPDATE pelicula SET titulo = ?, director = ?, actores = ?, origen = ?, genero = ?, estreno = ?, enCartelera = ? WHERE idPelicula = ? ";
 
-        
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, pelicula.getTitulo());
@@ -130,9 +129,9 @@ public class PeliculaData {
             ps.setString(3, pelicula.getActores());
             ps.setString(4, pelicula.getOrigen());
             ps.setString(5, pelicula.getGenero());
-            ps.setDate(6, java.sql.Date.valueOf(pelicula.getEstreno())); 
-            ps.setBoolean(7, pelicula.isEnCartelera()); 
-            ps.setInt(8, pelicula.getIdPelicula()); 
+            ps.setDate(6, java.sql.Date.valueOf(pelicula.getEstreno()));
+            ps.setBoolean(7, pelicula.isEnCartelera());
+            ps.setInt(8, pelicula.getIdPelicula());
 
             int n = ps.executeUpdate();
             if (n > 0) {
@@ -142,7 +141,7 @@ public class PeliculaData {
             }
 
         } catch (SQLException e) {
-            System.err.println("Error al modificar pelicula: " + e.getMessage()); 
+            System.err.println("Error al modificar pelicula: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Película.");
         }
     }

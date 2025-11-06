@@ -4,12 +4,12 @@ package Vista;
  *
  * @author Grupo 11
  */
-public class vistaUsuario extends javax.swing.JInternalFrame {
+public class vistaLogin extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form vistaUsuario
      */
-    public vistaUsuario() {
+    public vistaLogin() {
         initComponents();
     }
 

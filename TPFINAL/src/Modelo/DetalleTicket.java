@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class DetalleTicket {
     private int codD;
-    private Proyeccion funcion;
+    private Proyeccion proyeccion;
     private ArrayList<Asiento> asiento;
     private int cant;
     private double subtotal;
     private Ticket ticket;
 
-    public DetalleTicket(int codD, Proyeccion funcion, ArrayList<Asiento> asiento, int cant, double subtotal, Ticket ticket) {
+    public DetalleTicket(int codD, Proyeccion proyeccion, ArrayList<Asiento> asiento, int cant, double subtotal, Ticket ticket) {
         this.codD = codD;
-        this.funcion = funcion;
+        this.proyeccion = proyeccion;
         this.asiento = asiento;
         this.cant = cant;
         this.subtotal = subtotal;
@@ -27,12 +27,12 @@ public class DetalleTicket {
         this.codD = codD;
     }
 
-    public Proyeccion getFuncion() {
-        return funcion;
+    public Proyeccion getProyeccion() {
+        return proyeccion;
     }
 
-    public void setFuncion(Proyeccion funcion) {
-        this.funcion = funcion;
+    public void setProyeccion(Proyeccion proyeccion) {
+        this.proyeccion = proyeccion;
     }
 
     public ArrayList<Asiento> getAsiento() {
@@ -69,7 +69,7 @@ public class DetalleTicket {
 
     @Override
     public String toString() {
-        return "DetalleTicket{" + "codD=" + codD + ", funcion=" + funcion + ", asiento=" + asiento + ", cant=" + cant + ", subtotal=" + subtotal + ", ticket=" + ticket + '}';
+        return "DetalleTicket{" + "codD=" + codD + ", proyeccion=" + proyeccion + ", asiento=" + asiento + ", cant=" + cant + ", subtotal=" + subtotal + ", ticket=" + ticket + '}';
     }
     
     

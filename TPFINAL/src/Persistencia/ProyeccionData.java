@@ -14,7 +14,9 @@ import java.sql.Connection;
 import java.util.HashSet;
 import java.util.Set;
 
-/* @author Grupo 11 */
+/**
+ * @author Grupo 11
+ */
 public class ProyeccionData {
 
     private Connection con = null;
@@ -27,7 +29,6 @@ public class ProyeccionData {
         String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, nroSala, idPelicula) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            
 
             ps.setString(1, funcion.getIdioma());
             ps.setBoolean(2, funcion.isEs3D());
@@ -38,15 +39,14 @@ public class ProyeccionData {
             ps.setDouble(7, funcion.getPrecioDelLugar());
             ps.setInt(8, funcion.getPelicula().getIdPelicula());
             ps.setInt(9, funcion.getSala().getNroSala());
-            
 
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
-                
+
                 if (rs.next()) {
                     funcion.setCodProyeccion(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Función creada con éxito (ID " + funcion.getCodProyeccion()+ ").");
+                    JOptionPane.showMessageDialog(null, "Función creada con éxito (ID " + funcion.getCodProyeccion() + ").");
                 }
             }
 
@@ -103,7 +103,5 @@ public class ProyeccionData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Función.");
         }
     }
-    
-   
-    
+
 }

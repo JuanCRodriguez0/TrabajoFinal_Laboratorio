@@ -1,4 +1,3 @@
-
 package Persistencia;
 
 import Modelo.Conexion;
@@ -12,21 +11,19 @@ import javax.swing.JOptionPane;
 import java.sql.Date;
 
 /**
- *
- * @author jerem
+ * @author Grupo 11
  */
 public class TicketData {
-    
-    
-     private Connection con = null;
+
+    private Connection con = null;
 
     public TicketData() throws SQLException {
         con = Conexion.getConexion();
-}
-    
-    public void crearTicket (Ticket ticket){
+    }
+
+    public void crearTicket(Ticket ticket) {
         String sql = "INSERT INTO ticketcompra(fechaCompra, fechaFuncion, monto, dni, codTicket) VALUES ?,?,?,?,?)";
-        
+
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setDate(1, java.sql.Date.valueOf(ticket.getFechaCompra()));
@@ -39,7 +36,7 @@ public class TicketData {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     ticket.setCodTicket(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Ticket creado con éxito (ID " + ticket.getCodTicket()+ ").");
+                    JOptionPane.showMessageDialog(null, "Ticket creado con éxito (ID " + ticket.getCodTicket() + ").");
                 }
             }
 
@@ -47,17 +44,15 @@ public class TicketData {
             System.err.println("Error al crear ticket: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ticket.");
         }
-        
+
     }
-    
-    public Ticket buscarTicket (int id){
-         
-    
-            String sql = "SELECT fechaCompra, fechaFuncion, monto, dni FROM ticketcompra WHERE codTicket = ?";
-            Ticket ticket = null;
-            
-            
-            try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+    public Ticket mostrarTicket(int id) {
+
+        String sql = "SELECT fechaCompra, fechaFuncion, monto, dni FROM ticketcompra WHERE codTicket = ?";
+        Ticket ticket = null;
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -69,7 +64,7 @@ public class TicketData {
                     ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
                     ticket.setMonto(rs.getDouble("monto"));
                     ticket.getComprador().setDni(Integer.parseInt("dni"));
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Ticket con ID " + id + " no encontrada.");
                 }
@@ -79,26 +74,9 @@ public class TicketData {
             System.err.println("Error al acceder al ticket: " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ticket.");
         }
-            
-            
-            
-            return ticket;
-            
-            
-            
-            
-        }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+        return ticket;
+
+    }
     
 }

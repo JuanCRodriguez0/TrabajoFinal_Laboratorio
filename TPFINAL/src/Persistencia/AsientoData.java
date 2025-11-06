@@ -11,8 +11,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author jerem
+ * @author Grupo 11
  */
 public class AsientoData {
 
@@ -65,7 +64,7 @@ public class AsientoData {
         }
     }
 
-   public void deshabilitarAsiento (int id){
+    public void deshabilitarAsiento(int id) {
         String sql = "UPDATE asiento SET estado= 0 WHERE codAsiento = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -80,9 +79,9 @@ public class AsientoData {
             System.err.println("Error al intentar deshabilitar asiento: " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla asiento.");
         }
-    
-   }
-    
+
+    }
+
     public void modificarAsiento(Asiento asiento) {
         String sql = "UPDATE asiento SET fila = ? ,numero=? ,estado= ? ,codProyeccion = ? WHERE codAsiento = ? ";
 
@@ -94,7 +93,6 @@ public class AsientoData {
             ps.setInt(4, asiento.getFuncion().getCodProyeccion());
             ps.setInt(5, asiento.getCodAsiento());
 
-            
             int n = ps.executeUpdate();
             if (n == 1) {
                 JOptionPane.showMessageDialog(null, "Asiento modificado con éxito.");
@@ -106,12 +104,5 @@ public class AsientoData {
         }
 
     }
-   
-   
-   
-   
-   
-   
-   
-   
+
 }
