@@ -11,7 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -146,4 +148,30 @@ public class PeliculaData {
         }
     }
 
+    public List<Pelicula> listarPeliculas() {
+        List<Pelicula> peliculas = new ArrayList<>();
+
+        String sql = "SELECT titulo, director, actores, genero, estreno, enCartelera "
+                + "FROM pelicula";
+        // + "WHERE idPelicula = ?";
+
+        try (Connection con = Conexion.getConexion(); PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Pelicula p1 = new Pelicula();
+                rs.getString("titulo");
+                rs.getString("director");
+                rs.getString("actores");
+                rs.getString("genero");
+                rs.getDate("estreno");
+                rs.getBoolean("enCartelera");
+                peliculas.add(p1);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al listar peliculas: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar películas: " + e.getMessage());
+        }
+
+        return peliculas;
+    }
 }

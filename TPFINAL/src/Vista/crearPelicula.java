@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,6 +31,7 @@ public class crearPelicula extends javax.swing.JInternalFrame {
      */
     public crearPelicula() {
         initComponents();
+        tablaPeliculas();
     }
 
     /**
@@ -282,7 +284,7 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         String director = usuarioNombre5.getText();
         String actores = usuarioNombre6.getText();
         String origen = usuarioNombre3.getText();
-        int genero = jComboBox1.getSelectedIndex(); //Acá hay que convertir
+        int genero = jComboBox1.getSelectedIndex(); // Acá hay que convertir
         String generoSt = "";
         /*
         Infantil
@@ -317,7 +319,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         }
 
         Date fechin = jDateChooser1.getDate();
-        
 
         int enCartelera = comboEstado3.getSelectedIndex();
         Boolean enCarteleraBo = true;
@@ -332,8 +333,8 @@ public class crearPelicula extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No eligió una opcíon en Cartelera.");
                 break;
         }
-        
-        //String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera
+
+        // String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera
         Pelicula nuevaPeli = new Pelicula(titulo, director, actores, origen, generoSt, fechin, enCarteleraBo);
         PeliculaData pd = null;
         try {
@@ -341,10 +342,8 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
         }
-        
+
         pd.crearPelicula(nuevaPeli);
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -360,7 +359,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboEstado3;
@@ -387,55 +385,31 @@ public class crearPelicula extends javax.swing.JInternalFrame {
     private javax.swing.JTextField usuarioNombre6;
     // End of variables declaration//GEN-END:variables
 
-    public void listarPeliculas(){
-        /*DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Alumno");
-        modelo.addColumn("Apellido");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Estado");
-
-        jTable1.setModel(modelo);
-
-        String sql = "SELECT idAlumno, apellido, nombre, estado "
-                + "FROM alumno "
-                + "WHERE idAlumno = ?";
-        
-        try (Connection con = Conexion.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setInt(1, idAlumno);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Object[] fila = {
-                    rs.getInt("idAlumno"),
-                    rs.getString("apellido"),
-                    rs.getString("nombre"),
-                    rs.getBoolean("estado"),};
-                modelo.addRow(fila);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al listar alumnos: " + e.getMessage());
-        }*/
-        
+    public void tablaPeliculas() {
         PeliculaData pd = null;
+        
         try {
             pd = new PeliculaData();
+            List<Pelicula> pelis = pd.listarPeliculas();
+
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("Titulo");
+            modelo.addColumn("Director");
+            modelo.addColumn("Actores");
+            modelo.addColumn("Genero");
+            modelo.addColumn("Estreno");
+            modelo.addColumn("En Cartelera");
+
+            for (Pelicula p : pelis) {
+                modelo.addRow(new Object[]{
+                    p.getTitulo(), p.getDirector(), p.getActores(), p.getGenero(), p.getEstreno(), p.isEnCartelera()
+                });
+            }
+
+            jTable1.setModel(modelo);
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
         }
-        
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Titulo");
-        modelo.addColumn("Director");
-        modelo.addColumn("Actores");
-        modelo.addColumn("Genero");
-        modelo.addColumn("Estreno");
-        modelo.addColumn("En Cartelera");
-        
-        jTable1.setModel(modelo);
-        
-        
-        
-        
     }
 }
