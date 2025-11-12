@@ -26,6 +26,7 @@ public class PeliculaData {
     }
 
     public void crearPelicula(Pelicula pelicula) {
+        java.sql.Date fechaSQL = new java.sql.Date(pelicula.getEstreno().getTime());
         String sql = "INSERT INTO pelicula(titulo, director, actores, origen, genero, estreno, enCartelera) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -36,16 +37,14 @@ public class PeliculaData {
             ps.setString(3, pelicula.getActores());
             ps.setString(4, pelicula.getOrigen());
             ps.setString(5, pelicula.getGenero());
-            ps.setDate(6, Date.valueOf(pelicula.getEstreno()));
+            ps.setDate(6, fechaSQL);
             ps.setBoolean(7, pelicula.isEnCartelera());
 
             ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    pelicula.setIdPelicula(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Película creada con éxito (ID " + pelicula.getIdPelicula() + ").");
-                }
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                pelicula.setIdPelicula(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Película creada con éxito (ID " + pelicula.getIdPelicula() + ").");
             }
 
         } catch (SQLException ex) {
@@ -90,7 +89,7 @@ public class PeliculaData {
     }
 
     public Pelicula buscarPelicula(int id) {
-        String sql = "SELECT titulo, director, actores, origen, genero, estreno FROM pelicula WHERE idPelicula = ? AND enCartelera = 1";
+        String sql = "SELECT titulo, director, actores, origen, genero, estreno FROM pelicula WHERE idPelicula = ?";
         Pelicula pelicula = null;
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -105,7 +104,7 @@ public class PeliculaData {
                     pelicula.setActores(rs.getString("actores"));
                     pelicula.setOrigen(rs.getString("origen"));
                     pelicula.setGenero(rs.getString("genero"));
-                    pelicula.setEstreno(rs.getDate("estreno").toLocalDate());
+                    pelicula.setEstreno(rs.getDate("estreno"));
                 } else {
                     JOptionPane.showMessageDialog(null, "Película con ID " + id + " no encontrada.");
                 }
@@ -120,6 +119,7 @@ public class PeliculaData {
     }
 
     public void modificarPelicula(Pelicula pelicula) {
+        java.sql.Date fechaSQL = new java.sql.Date(pelicula.getEstreno().getTime());
         String sql = "UPDATE pelicula SET titulo = ?, director = ?, actores = ?, origen = ?, genero = ?, estreno = ?, enCartelera = ? WHERE idPelicula = ? ";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -129,7 +129,7 @@ public class PeliculaData {
             ps.setString(3, pelicula.getActores());
             ps.setString(4, pelicula.getOrigen());
             ps.setString(5, pelicula.getGenero());
-            ps.setDate(6, java.sql.Date.valueOf(pelicula.getEstreno()));
+            ps.setDate(6, fechaSQL);
             ps.setBoolean(7, pelicula.isEnCartelera());
             ps.setInt(8, pelicula.getIdPelicula());
 
@@ -145,4 +145,5 @@ public class PeliculaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Película.");
         }
     }
+
 }

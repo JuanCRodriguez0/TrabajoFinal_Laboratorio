@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Pelicula {
     private int idPelicula; 
@@ -9,14 +10,13 @@ public class Pelicula {
     private String actores;
     private String origen;
     private String genero;
-    private LocalDate estreno;
+    private Date estreno;
     private boolean enCartelera;
     
     public Pelicula() {
     }
 
-    public Pelicula(int idPelicula, String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera) {
-        this.idPelicula = idPelicula;
+    public Pelicula(String titulo, String director, String actores, String origen, String genero, Date estreno, boolean enCartelera) {
         this.titulo = titulo;
         this.director = director;
         this.actores = actores;
@@ -31,12 +31,12 @@ public class Pelicula {
         return idPelicula;
     }
 
-    public void setIdPelicula(int idPelicula) {
-        this.idPelicula = idPelicula;
-    }
-
     public String getTitulo() {
         return titulo;
+    }
+
+    public void setIdPelicula(int idPelicula) {
+        this.idPelicula = idPelicula;
     }
 
     public void setTitulo(String titulo) {
@@ -75,11 +75,11 @@ public class Pelicula {
         this.genero = genero;
     }
 
-    public LocalDate getEstreno() {
+    public Date getEstreno() {
         return estreno;
     }
 
-    public void setEstreno(LocalDate estreno) {
+    public void setEstreno(Date estreno) {
         this.estreno = estreno;
     }
 
