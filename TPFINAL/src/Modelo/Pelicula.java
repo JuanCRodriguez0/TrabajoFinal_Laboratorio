@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Pelicula {
-    private int idPelicula; 
+
+    private int idPelicula;
     private String titulo;
     private String director;
     private String actores;
@@ -12,7 +13,7 @@ public class Pelicula {
     private String genero;
     private Date estreno;
     private boolean enCartelera;
-    
+
     public Pelicula() {
     }
 
@@ -22,21 +23,20 @@ public class Pelicula {
         this.actores = actores;
         this.origen = origen;
         this.genero = genero;
-        this.estreno = estreno; 
+        this.estreno = estreno;
         this.enCartelera = enCartelera;
     }
-    
-  
+
     public int getIdPelicula() {
         return idPelicula;
     }
 
-    public String getTitulo() {
-        return titulo;
-    }
-
     public void setIdPelicula(int idPelicula) {
         this.idPelicula = idPelicula;
+    }
+
+    public String getTitulo() {
+        return titulo;
     }
 
     public void setTitulo(String titulo) {
@@ -93,18 +93,14 @@ public class Pelicula {
 
     @Override
     public String toString() {
-        return "Pelicula{" 
-                + "titulo=" + titulo 
-                + ", director=" + director 
-                + ", actores=" + actores 
-                + ", origen=" + origen 
-                + ", genero=" + genero 
-                + ", estreno=" + estreno 
+        return "Pelicula{"
+                + "titulo=" + titulo
+                + ", director=" + director
+                + ", actores=" + actores
+                + ", origen=" + origen
+                + ", genero=" + genero
+                + ", estreno=" + estreno
                 + ", enCartelera=" + enCartelera + '}';
     }
 
-    
-    
-
-    
 }

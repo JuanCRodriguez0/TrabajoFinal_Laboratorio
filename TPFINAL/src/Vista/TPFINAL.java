@@ -18,10 +18,10 @@ import java.sql.SQLException;
 public class TPFINAL {
 
     public static void main(String[] args) throws SQLException {
-        // int nroSala, boolean apta3D, int capacidad, boolean estado
-        Sala s1 = new Sala (1, true , 170, true );
-        Sala s2 = new Sala (2, false, 230, true);
-        Sala s3 = new Sala (3, true, 30, false);
+        // int nroSala (update: este se lo sacamos), boolean apta3D, int capacidad, boolean estado
+        Sala s1 = new Sala (true , 170, true);
+        Sala s2 = new Sala (false, 230, true);
+        Sala s3 = new Sala (true, 30, false);
         
         SalaData SD = new SalaData(); 
         
@@ -38,12 +38,12 @@ public class TPFINAL {
         System.out.println("Se habilito"); 
         
         
-      Sala salita = SD.buscarSala(3);
+        Sala salita = SD.buscarSala(3);
    
         System.out.println(salita.toString()); 
         
         
-       Sala modificarSala1 = new Sala(1, true, 120, true); 
+       Sala modificarSala1 = new Sala(true, 120, true); 
        SD.modificarSala(modificarSala1); 
       
     }

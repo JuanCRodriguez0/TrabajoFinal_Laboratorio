@@ -63,8 +63,10 @@ public class PeliculaData {
 
             ps.setInt(1, id);
             int n = ps.executeUpdate();
-            if (n == 1) {
+            if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Película habilitada con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró la película con ese ID.");
             }
 
         } catch (SQLException e) {
@@ -78,10 +80,12 @@ public class PeliculaData {
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setInt(0, id);
+            ps.setInt(1, id);
             int n = ps.executeUpdate();
-            if (n == 0) {
+            if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Película deshabilitada con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró la película con ese ID.");
             }
 
         } catch (SQLException e) {
@@ -101,7 +105,7 @@ public class PeliculaData {
                 if (rs.next()) {
                     pelicula = new Pelicula();
                     pelicula.setIdPelicula(id);
-                    pelicula.setTitulo(rs.getNString("titulo"));
+                    pelicula.setTitulo(rs.getString("titulo"));
                     pelicula.setDirector(rs.getString("director"));
                     pelicula.setActores(rs.getString("actores"));
                     pelicula.setOrigen(rs.getString("origen"));
@@ -153,18 +157,17 @@ public class PeliculaData {
 
         String sql = "SELECT titulo, director, actores, genero, estreno, enCartelera "
                 + "FROM pelicula";
-        // + "WHERE idPelicula = ?";
 
-        try (Connection con = Conexion.getConexion(); PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                Pelicula p1 = new Pelicula();
-                rs.getString("titulo");
-                rs.getString("director");
-                rs.getString("actores");
-                rs.getString("genero");
-                rs.getDate("estreno");
-                rs.getBoolean("enCartelera");
-                peliculas.add(p1);
+                Pelicula pelicula = new Pelicula();
+                pelicula.setTitulo(rs.getString("titulo"));
+                pelicula.setDirector(rs.getString("director"));
+                pelicula.setActores(rs.getString("actores"));
+                pelicula.setGenero(rs.getString("genero"));
+                pelicula.setEstreno(rs.getDate("estreno"));
+                pelicula.setEnCartelera(rs.getBoolean("enCartelera"));
+                peliculas.add(pelicula);
             }
 
         } catch (SQLException e) {

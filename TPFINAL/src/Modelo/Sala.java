@@ -7,8 +7,9 @@ public class Sala {
     private int capacidad;
     private boolean estado;
 
-    public Sala(int nroSala, boolean apta3D, int capacidad, boolean estado) {
-        this.nroSala = nroSala;
+    public Sala(boolean apta3D, int capacidad, boolean estado) {
+        // acá habría que revisar y debatir si en el constructor le dejamos la variable nroSala que es el id auto-incremental en la base de datos.
+        // update: creo que no podríamos no sacarla, porque cuando querramos crearla desde la vista no deberíamos poder ponerle el id, lo mismo que pasa cuando creamos una peli
         this.apta3D = apta3D;
         this.capacidad = capacidad;
         this.estado = estado;

@@ -4,6 +4,10 @@
  */
 package Vista;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Jeremias
@@ -235,11 +239,15 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         
-        jDesktopPane1.repaint();
-        crearPelicula aux = new crearPelicula();
-        aux.setVisible(true);
-        jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        try { // acá le tuve que meter este try-catch porque sino me daba error xd por lo pronto no tira ningún error y esperemos que no lo haga nunca jajsj
+            jDesktopPane1.repaint();
+            crearPelicula aux = new crearPelicula();
+            aux.setVisible(true);
+            jDesktopPane1.add(aux); 
+            jDesktopPane1.moveToFront(aux);
+        } catch (SQLException ex) {
+            Logger.getLogger(vistaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

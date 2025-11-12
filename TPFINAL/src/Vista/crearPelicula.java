@@ -29,7 +29,7 @@ public class crearPelicula extends javax.swing.JInternalFrame {
     /**
      * Creates new form modificarUsuario
      */
-    public crearPelicula() {
+    public crearPelicula() throws SQLException {
         initComponents();
         tablaPeliculas();
     }
@@ -344,21 +344,55 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         }
 
         pd.crearPelicula(nuevaPeli);
+
+        try {
+            tablaPeliculas();
+        } catch (SQLException ex) {
+            Logger.getLogger(crearPelicula.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // limpiamos todos los campos luego de crear la película
+        usuarioNombre4.setText("");
+        usuarioNombre5.setText("");
+        usuarioNombre6.setText("");
+        usuarioNombre3.setText("");
+        jComboBox1.setSelectedIndex(-1);
+        jDateChooser1.setDate(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         this.dispose();
-        //jDesktopPane1.removeAll();
-        //jDesktopPane1.repaint();
-        //vistaAdmin aux = new vistaAdmin();
-        //aux.setVisible(true);
-        //jDesktopPane1.add(aux);
-        //jDesktopPane1.moveToFront(aux);
+        // jDesktopPane1.removeAll();
+        // jDesktopPane1.repaint();
+        // vistaAdmin aux = new vistaAdmin();
+        // aux.setVisible(true);
+        // jDesktopPane1.add(aux);
+        // jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    public void tablaPeliculas() throws SQLException {
+        List<Pelicula> pelis = new PeliculaData().listarPeliculas();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Titulo");
+        modelo.addColumn("Director");
+        modelo.addColumn("Actores");
+        modelo.addColumn("Genero");
+        modelo.addColumn("Estreno");
+        modelo.addColumn("En Cartelera");
+
+        for (Pelicula p : pelis) {
+            modelo.addRow(new Object[]{
+                p.getTitulo(), p.getDirector(), p.getActores(), p.getGenero(), p.getEstreno(), p.isEnCartelera()
+            });
+        }
+
+        jTable1.setModel(modelo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboEstado3;
@@ -384,32 +418,4 @@ public class crearPelicula extends javax.swing.JInternalFrame {
     private javax.swing.JTextField usuarioNombre5;
     private javax.swing.JTextField usuarioNombre6;
     // End of variables declaration//GEN-END:variables
-
-    public void tablaPeliculas() {
-        PeliculaData pd = null;
-        
-        try {
-            pd = new PeliculaData();
-            List<Pelicula> pelis = pd.listarPeliculas();
-
-            DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("Titulo");
-            modelo.addColumn("Director");
-            modelo.addColumn("Actores");
-            modelo.addColumn("Genero");
-            modelo.addColumn("Estreno");
-            modelo.addColumn("En Cartelera");
-
-            for (Pelicula p : pelis) {
-                modelo.addRow(new Object[]{
-                    p.getTitulo(), p.getDirector(), p.getActores(), p.getGenero(), p.getEstreno(), p.isEnCartelera()
-                });
-            }
-
-            jTable1.setModel(modelo);
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
-        }
-    }
 }

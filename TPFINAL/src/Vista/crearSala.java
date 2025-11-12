@@ -4,6 +4,15 @@
  */
 package Vista;
 
+import Modelo.Sala;
+import Persistencia.SalaData;
+import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jeremias
@@ -13,8 +22,9 @@ public class crearSala extends javax.swing.JInternalFrame {
     /**
      * Creates new form modificarUsuario
      */
-    public crearSala() {
+    public crearSala() throws SQLException {
         initComponents();
+        tablaSalas();
     }
 
     /**
@@ -200,7 +210,55 @@ public class crearSala extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        int apta3D = comboEstado2.getSelectedIndex();
+        boolean isApta3D = true;
+        
+        int capacidad = Integer.parseInt(buscarDNI1.getText());
+        
+        int estado = comboEstado5.getSelectedIndex();
+        boolean isEstado = true;
+        
+        switch (apta3D) {
+            case 0:
+                isApta3D = true;
+                break;
+            case 1:
+                isApta3D = false;
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "No eligió si la sala es apta para reproducir películas 3D o no.");
+        }
+        
+        switch (estado) {
+            case 0:
+                isEstado = true;
+                break;
+            case 1:
+                isEstado = false;
+                break;
+            default:
+                JOptionPane.showMessageDialog(this, "No eligió si la sala está habilitada o no.");
+        }
+        
+        // boolean apta3D, int capacidad, boolean estado
+        Sala nuevaSala = new Sala(isApta3D, capacidad, isEstado);
+        SalaData sd = null;
+        try {
+            sd = new SalaData();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
+        }
+        
+        sd.crearSala(nuevaSala);
+        
+        try {
+            tablaSalas();
+        } catch (SQLException ex) {
+            Logger.getLogger(crearSala.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // limpiamos todos los campos luego de crear la sala
+        buscarDNI1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -215,6 +273,23 @@ public class crearSala extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public void tablaSalas() throws SQLException {
+        List<Sala> salas = new SalaData().listarSalas();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("nroSala");
+        modelo.addColumn("es3D");
+        modelo.addColumn("capacidad");
+        modelo.addColumn("estado");
+
+        for (Sala s : salas) {
+            modelo.addRow(new Object[]{
+                s.getNroSala(), s.isApta3D(), s.getCapacidad(), s.isEstado()
+            });
+        }
+
+        jTable1.setModel(modelo);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField buscarDNI1;

@@ -11,7 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -82,14 +84,14 @@ public class SalaData {
     }
 
     public void crearSala(Sala sala) {
-        String sql = "INSERT INTO sala(nroSala, apta3D, capacidad, estado) VALUES (? ,? ,?,? )";
+        String sql = "INSERT INTO sala(apta3D, capacidad, estado) VALUES (?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            ps.setInt(1, sala.getNroSala());
-            ps.setBoolean(2, sala.isApta3D());
-            ps.setInt(3, sala.getCapacidad());
-            ps.setBoolean(4, sala.isEstado());
+            ps.setBoolean(1, sala.isApta3D());
+            ps.setInt(2, sala.getCapacidad());
+            ps.setBoolean(3, sala.isEstado());
+            
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -133,5 +135,29 @@ public class SalaData {
         }
 
         return sala;
+    }
+
+    public List<Sala> listarSalas() {
+        List<Sala> salas = new ArrayList<>();
+
+        String sql = "SELECT nroSala, apta3D, capacidad, estado FROM sala";
+
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Sala sala = new Sala();
+                sala.setNroSala(rs.getInt("nroSala"));
+                sala.setApta3D(rs.getBoolean("apta3D"));
+                sala.setCapacidad(rs.getInt("capacidad"));
+                sala.setEstado(rs.getBoolean("estado"));
+                salas.add(sala);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error al listar las salas: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar las salas.");
+        }
+
+        return salas;
     }
 }
