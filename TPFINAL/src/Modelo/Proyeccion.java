@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Proyeccion {
     private int codProyeccion;
@@ -9,15 +10,15 @@ public class Proyeccion {
     private String idioma;
     private boolean es3D;
     private boolean subtitulada;
-    private LocalDate horaInicio;
-    private LocalDate horaFin;
+    private Date horaInicio;
+    private Date horaFin;
     private int lugaresDisponibles;
     private double precioDelLugar;
 
     public Proyeccion() {
     }
 
-    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, LocalDate horaInicio, LocalDate horaFin, int lugaresDisponibles, double precioDelLugar) {
+    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, Date horaInicio, Date horaFin, int lugaresDisponibles, double precioDelLugar) {
         this.idioma = idioma;
         this.es3D = es3D;
         this.subtitulada = subtitulada;
@@ -79,19 +80,19 @@ public class Proyeccion {
         this.subtitulada = subtitulada;
     }
 
-    public LocalDate getHoraInicio() {
+    public Date getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(LocalDate horaInicio) {
+    public void setHoraInicio(Date horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public LocalDate getHoraFin() {
+    public Date getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(LocalDate horaFin) {
+    public void setHoraFin(Date horaFin) {
         this.horaFin = horaFin;
     }
 

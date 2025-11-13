@@ -262,7 +262,12 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         
         jDesktopPane1.repaint();
-        crearSala aux = new crearSala();
+        crearSala aux = null;
+        try{
+            aux= new crearSala();
+        }catch (SQLException ex) {
+            Logger.getLogger(vistaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         aux.setVisible(true);
         jDesktopPane1.add(aux);
         jDesktopPane1.moveToFront(aux); 

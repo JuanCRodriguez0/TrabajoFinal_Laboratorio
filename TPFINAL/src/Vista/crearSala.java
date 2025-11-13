@@ -38,7 +38,6 @@ public class crearSala extends javax.swing.JInternalFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -55,13 +54,6 @@ public class crearSala extends javax.swing.JInternalFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -104,12 +96,14 @@ public class crearSala extends javax.swing.JInternalFrame {
         });
 
         comboEstado2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        comboEstado2.setSelectedIndex(-1);
 
         jLabel6.setText("Salas existentes:");
 
         jLabel8.setText("Habilitada");
 
         comboEstado5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        comboEstado5.setSelectedIndex(-1);
         comboEstado5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEstado5ActionPerformed(evt);
@@ -119,7 +113,6 @@ public class crearSala extends javax.swing.JInternalFrame {
         jLabel7.setText("Crear Sala");
 
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -157,13 +150,11 @@ public class crearSala extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4)
-                                .addGap(31, 31, 31)
-                                .addComponent(jButton3)))
+                                .addComponent(jButton4)))
                         .addGap(36, 36, 36))))
         );
         jDesktopPane1Layout.setVerticalGroup(
@@ -190,7 +181,6 @@ public class crearSala extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addGap(37, 37, 37))
         );
@@ -210,55 +200,65 @@ public class crearSala extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int apta3D = comboEstado2.getSelectedIndex();
-        boolean isApta3D = true;
-        
-        int capacidad = Integer.parseInt(buscarDNI1.getText());
-        
-        int estado = comboEstado5.getSelectedIndex();
-        boolean isEstado = true;
-        
-        switch (apta3D) {
-            case 0:
-                isApta3D = true;
-                break;
-            case 1:
-                isApta3D = false;
-                break;
-            default:
-                JOptionPane.showMessageDialog(this, "No eligió si la sala es apta para reproducir películas 3D o no.");
+        boolean test = false;
+        while (comboEstado2.getSelectedIndex() != -1 && comboEstado5.getSelectedIndex() != -1 && buscarDNI1.getText().equals("")) {
+            int apta3D = comboEstado2.getSelectedIndex();
+            boolean isApta3D = true;
+
+            int capacidad = Integer.parseInt(buscarDNI1.getText());
+
+            int estado = comboEstado5.getSelectedIndex();
+            boolean isEstado = true;
+
+            switch (apta3D) {
+                case 0:
+                    isApta3D = true;
+                    break;
+                case 1:
+                    isApta3D = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No eligió si la sala es apta para reproducir películas 3D o no.");
+            }
+
+            switch (estado) {
+                case 0:
+                    isEstado = true;
+                    break;
+                case 1:
+                    isEstado = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No eligió si la sala está habilitada o no.");
+                    break;
+            }
+
+            // boolean apta3D, int capacidad, boolean estado
+            Sala nuevaSala = new Sala(isApta3D, capacidad, isEstado);
+            SalaData sd = null;
+            try {
+                sd = new SalaData();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
+            }
+
+            sd.crearSala(nuevaSala);
+
+            try {
+                tablaSalas();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
+            }
+
+            // limpiamos todos los campos luego de crear la sala
+            buscarDNI1.setText("");
+            comboEstado2.setSelectedIndex(-1);
+            comboEstado5.setSelectedIndex(-1);
+            test = true;
         }
-        
-        switch (estado) {
-            case 0:
-                isEstado = true;
-                break;
-            case 1:
-                isEstado = false;
-                break;
-            default:
-                JOptionPane.showMessageDialog(this, "No eligió si la sala está habilitada o no.");
+        if (!test) {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");
         }
-        
-        // boolean apta3D, int capacidad, boolean estado
-        Sala nuevaSala = new Sala(isApta3D, capacidad, isEstado);
-        SalaData sd = null;
-        try {
-            sd = new SalaData();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
-        }
-        
-        sd.crearSala(nuevaSala);
-        
-        try {
-            tablaSalas();
-        } catch (SQLException ex) {
-            Logger.getLogger(crearSala.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        // limpiamos todos los campos luego de crear la sala
-        buscarDNI1.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -268,10 +268,6 @@ public class crearSala extends javax.swing.JInternalFrame {
     private void comboEstado5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEstado5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboEstado5ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void tablaSalas() throws SQLException {
         List<Sala> salas = new SalaData().listarSalas();
@@ -296,7 +292,6 @@ public class crearSala extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> comboEstado2;
     private javax.swing.JComboBox<String> comboEstado5;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel2;

@@ -26,12 +26,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class crearPelicula extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form modificarUsuario
-     */
     public crearPelicula() throws SQLException {
+
         initComponents();
         tablaPeliculas();
+        jDateChooser1.setDate(new Date());
     }
 
     /**
@@ -45,7 +44,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -70,13 +68,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Salir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -126,6 +117,11 @@ public class crearPelicula extends javax.swing.JInternalFrame {
 
         comboEstado3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
         comboEstado3.setSelectedIndex(-1);
+        comboEstado3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboEstado3ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Peliculas:");
 
@@ -140,9 +136,13 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Infantil", "Terror", "Comedia", "Drama", "Suspenso", "Acción" }));
         jComboBox1.setSelectedIndex(-1);
         jComboBox1.setToolTipText("");
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -166,14 +166,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(404, 404, 404)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -213,10 +205,17 @@ public class crearPelicula extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(comboEstado3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap(42, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 37, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +256,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
                     .addComponent(jButton4)
                     .addComponent(jButton1))
                 .addGap(35, 35, 35))
@@ -280,84 +278,91 @@ public class crearPelicula extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String titulo = usuarioNombre4.getText();
-        String director = usuarioNombre5.getText();
-        String actores = usuarioNombre6.getText();
-        String origen = usuarioNombre3.getText();
-        int genero = jComboBox1.getSelectedIndex(); // Acá hay que convertir
-        String generoSt = "";
-        /*
-        Infantil
-        Terror
-        Comedia
-        Drama
-        Suspenso
-        Acción
-         */
-        switch (genero) {
-            case 0:
-                generoSt = "Infantil";
-                break;
-            case 1:
-                generoSt = "Terror";
-                break;
-            case 2:
-                generoSt = "Comedia";
-                break;
-            case 3:
-                generoSt = "Drama";
-                break;
-            case 4:
-                generoSt = "Suspenso";
-                break;
-            case 5:
-                generoSt = "Acción";
-                break;
-            default:
-                JOptionPane.showMessageDialog(this, "No eligió una opcíon en género.");
-                break;
+        int i = 0;
+        while (!usuarioNombre4.getText().equals("") && !usuarioNombre5.getText().equals("") && !usuarioNombre6.getText().equals("") && !usuarioNombre3.getText().equals("")
+                && jComboBox1.getSelectedIndex() != -1 && comboEstado3.getSelectedIndex() != -1) {
+
+            String titulo = usuarioNombre4.getText();
+            String director = usuarioNombre5.getText();
+            String actores = usuarioNombre6.getText();
+            String origen = usuarioNombre3.getText();
+            int genero = jComboBox1.getSelectedIndex(); // Acá hay que convertir
+            String generoSt = "";
+
+            switch (genero) {
+                case 0:
+                    generoSt = "Infantil";
+                    break;
+                case 1:
+                    generoSt = "Terror";
+                    break;
+                case 2:
+                    generoSt = "Comedia";
+                    break;
+                case 3:
+                    generoSt = "Drama";
+                    break;
+                case 4:
+                    generoSt = "Suspenso";
+                    break;
+                case 5:
+                    generoSt = "Acción";
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No eligió una opcíon en género.");
+                    break;
+            }
+            Date fechin = null;
+            try {
+                fechin = jDateChooser1.getDate();
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(this, "Deberias cargar los datos.");
+            }
+
+            int enCartelera = comboEstado3.getSelectedIndex();
+            Boolean enCarteleraBo = true;
+            switch (enCartelera) {
+                case 0:
+                    enCarteleraBo = true;
+                    break;
+                case 1:
+                    enCarteleraBo = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(this, "No eligió una opcíon en Cartelera.");
+                    break;
+            }
+
+            // String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera
+            Pelicula nuevaPeli = new Pelicula(titulo, director, actores, origen, generoSt, fechin, enCarteleraBo);
+            PeliculaData pd = null;
+            try {
+                pd = new PeliculaData();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
+            }
+
+            pd.crearPelicula(nuevaPeli);
+
+            try {
+                tablaPeliculas();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
+            }
+
+            // limpiamos todos los campos luego de crear la película
+            usuarioNombre4.setText("");
+            usuarioNombre5.setText("");
+            usuarioNombre6.setText("");
+            usuarioNombre3.setText("");
+            jComboBox1.setSelectedIndex(-1);
+            comboEstado3.setSelectedIndex(-1);
+            jDateChooser1.setDate(new Date());
+            i++;
         }
-
-        Date fechin = jDateChooser1.getDate();
-
-        int enCartelera = comboEstado3.getSelectedIndex();
-        Boolean enCarteleraBo = true;
-        switch (enCartelera) {
-            case 0:
-                enCarteleraBo = true;
-                break;
-            case 1:
-                enCarteleraBo = false;
-                break;
-            default:
-                JOptionPane.showMessageDialog(this, "No eligió una opcíon en Cartelera.");
-                break;
+        if (i == 0) {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");
         }
-
-        // String titulo, String director, String actores, String origen, String genero, LocalDate estreno, boolean enCartelera
-        Pelicula nuevaPeli = new Pelicula(titulo, director, actores, origen, generoSt, fechin, enCarteleraBo);
-        PeliculaData pd = null;
-        try {
-            pd = new PeliculaData();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
-        }
-
-        pd.crearPelicula(nuevaPeli);
-
-        try {
-            tablaPeliculas();
-        } catch (SQLException ex) {
-            Logger.getLogger(crearPelicula.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // limpiamos todos los campos luego de crear la película
-        usuarioNombre4.setText("");
-        usuarioNombre5.setText("");
-        usuarioNombre6.setText("");
-        usuarioNombre3.setText("");
-        jComboBox1.setSelectedIndex(-1);
-        jDateChooser1.setDate(null);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -370,9 +375,13 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         // jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void comboEstado3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEstado3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboEstado3ActionPerformed
 
     public void tablaPeliculas() throws SQLException {
         List<Pelicula> pelis = new PeliculaData().listarPeliculas();
@@ -397,7 +406,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboEstado3;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
