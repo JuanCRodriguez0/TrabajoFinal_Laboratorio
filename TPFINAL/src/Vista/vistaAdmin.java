@@ -198,39 +198,46 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         jDesktopPane1.repaint();
         modificarPelicula aux = new modificarPelicula();
         aux.setVisible(true);
         jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        jDesktopPane1.repaint();
-        modificarUsuario aux = new modificarUsuario();
-        aux.setVisible(true);
-        jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        try {
+            jDesktopPane1.repaint();
+            modificarUsuario aux = new modificarUsuario();
+            aux.setVisible(true);
+            jDesktopPane1.add(aux);
+            jDesktopPane1.moveToFront(aux);
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+
         jDesktopPane1.repaint();
         modificarProyeccion aux = new modificarProyeccion();
         aux.setVisible(true);
         jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        
-        jDesktopPane1.repaint();
-        crearProyeccion aux = new crearProyeccion();
-        aux.setVisible(true);
-        jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        try {
+            jDesktopPane1.repaint();
+            crearProyeccion aux = new crearProyeccion();
+            aux.setVisible(true);
+            jDesktopPane1.add(aux);
+            jDesktopPane1.moveToFront(aux);
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -238,48 +245,48 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
         try { // acá le tuve que meter este try-catch porque sino me daba error xd por lo pronto no tira ningún error y esperemos que no lo haga nunca jajsj
             jDesktopPane1.repaint();
             crearPelicula aux = new crearPelicula();
             aux.setVisible(true);
-            jDesktopPane1.add(aux); 
+            jDesktopPane1.add(aux);
             jDesktopPane1.moveToFront(aux);
         } catch (SQLException ex) {
-            Logger.getLogger(vistaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error " + ex.getMessage());
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        
+
         jDesktopPane1.repaint();
         modificarSala aux = new modificarSala();
         aux.setVisible(true);
         jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        
+
         jDesktopPane1.repaint();
         crearSala aux = null;
-        try{
-            aux= new crearSala();
-        }catch (SQLException ex) {
+        try {
+            aux = new crearSala();
+        } catch (SQLException ex) {
             Logger.getLogger(vistaAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
         aux.setVisible(true);
         jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
+
         jDesktopPane1.repaint();
         verTicketsAdmin aux = new verTicketsAdmin();
         aux.setVisible(true);
         jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux); 
+        jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton9ActionPerformed
 
 

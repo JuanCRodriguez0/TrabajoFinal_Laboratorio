@@ -308,9 +308,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
                 case 5:
                     generoSt = "Acción";
                     break;
-                default:
-                    JOptionPane.showMessageDialog(this, "No eligió una opcíon en género.");
-                    break;
             }
             Date fechin = null;
             try {
@@ -327,9 +324,6 @@ public class crearPelicula extends javax.swing.JInternalFrame {
                     break;
                 case 1:
                     enCarteleraBo = false;
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(this, "No eligió una opcíon en Cartelera.");
                     break;
             }
 

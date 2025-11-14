@@ -30,8 +30,6 @@ public class ProyeccionData {
     }
 
     public void crearFuncion(Proyeccion funcion) {
-        java.sql.Date fechaSQL = new java.sql.Date(funcion.getHoraInicio().getTime());
-        java.sql.Date fechaSQL2 = new java.sql.Date(funcion.getHoraFin().getTime());
 
         String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, nroSala, idPelicula) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -40,12 +38,12 @@ public class ProyeccionData {
             ps.setString(1, funcion.getIdioma());
             ps.setBoolean(2, funcion.isEs3D());
             ps.setBoolean(3, funcion.isSubtitulada());
-            ps.setDate(4, fechaSQL);
-            ps.setDate(5, fechaSQL2);
+            ps.setString(4, funcion.getHoraFin());
+            ps.setString(5, funcion.getHoraFin());
             ps.setInt(6, funcion.getLugaresDisponibles());
             ps.setDouble(7, funcion.getPrecioDelLugar());
-            ps.setInt(8, funcion.getPelicula().getIdPelicula());
-            ps.setInt(9, funcion.getSala().getNroSala());
+            ps.setInt(8, funcion.getSalaId());
+            ps.setInt(9, funcion.getPeliId());
 
             ps.executeUpdate();
 
@@ -122,8 +120,8 @@ public class ProyeccionData {
                 proy.setIdioma(rs.getString("idioma"));
                 proy.setEs3D(rs.getBoolean("es3D"));
                 proy.setSubtitulada(rs.getBoolean("subtitulada"));
-                proy.setHoraInicio(rs.getDate("horaInicio"));
-                proy.setHoraFin(rs.getDate("horaFin"));
+                proy.setHoraInicio(rs.getString("horaInicio"));
+                proy.setHoraFin(rs.getString("horaFin"));
                 proy.setLugaresDisponibles(rs.getInt("lugaresDisponibles"));
                 proy.setPrecioDelLugar(rs.getDouble("precioDelLugar"));
                 proys.add(proy);

@@ -5,16 +5,11 @@ import Modelo.Pelicula;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Grupo 11
@@ -155,12 +150,13 @@ public class PeliculaData {
     public List<Pelicula> listarPeliculas() {
         List<Pelicula> peliculas = new ArrayList<>();
 
-        String sql = "SELECT titulo, director, actores, genero, estreno, enCartelera "
+        String sql = "SELECT idPelicula, titulo, director, actores, genero, estreno, enCartelera "
                 + "FROM pelicula";
 
         try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Pelicula pelicula = new Pelicula();
+                pelicula.setIdPelicula(rs.getInt("idPelicula"));
                 pelicula.setTitulo(rs.getString("titulo"));
                 pelicula.setDirector(rs.getString("director"));
                 pelicula.setActores(rs.getString("actores"));

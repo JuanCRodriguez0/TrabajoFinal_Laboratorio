@@ -11,9 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
-import java.sql.Date;
-import java.util.HashSet;
 
 /**
  * @author Grupo 11
@@ -27,24 +27,20 @@ public class CompradorData {
     }
 
     public void crearComprador(Comprador comprador) {
-        String sql = "INSERT INTO comprador (dni, nombre, fechaNac, password, medioDePago) VALUES (?,?,?,?,?)";
+        java.sql.Date fechaSQL = new java.sql.Date(comprador.getFechaNacimiento().getTime());
+        String sql = "INSERT INTO comprador (dni, nombre, fechaNac, password, medioDePago, estado) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            ps.setString(1, comprador.getNombre());
-            ps.setDate(2, java.sql.Date.valueOf(comprador.getFechaNacimiento()));
-            ps.setString(3, comprador.getPassword());
-            ps.setString(4, comprador.getMedioDePago());
+            ps.setInt(1, comprador.getDni());
+            ps.setString(2, comprador.getNombre());
+            ps.setDate(3, fechaSQL);
+            ps.setString(4, comprador.getPassword());
+            ps.setString(5, comprador.getMedioDePago());
+            ps.setBoolean(6, comprador.getEstado());
 
             ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    comprador.setDni(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Comprador creado con éxito (ID " + comprador.getDni() + ").");
-                }
-
-            }
+            JOptionPane.showMessageDialog(null, "Comprador creado con éxito.");
 
         } catch (SQLException e) {
             System.err.println("Error al crear comprador: " + e.getMessage());
@@ -65,7 +61,7 @@ public class CompradorData {
                     comprador = new Comprador();
                     comprador.setDni(id);
                     comprador.setNombre(rs.getNString("nombre"));
-                    comprador.setFechaNacimiento(rs.getDate("fechaNac").toLocalDate());
+                    comprador.setFechaNacimiento(rs.getDate("fechaNac"));
                     comprador.setPassword(rs.getNString("password"));
                     comprador.setMedioDePago(rs.getNString("medioDePago"));
 
@@ -83,6 +79,25 @@ public class CompradorData {
         return comprador;
     }
 
+    public Boolean buscarCompradorInicioSesion(int id, String contra){
+        String sql = "SELECT dni, password FROM comprador WHERE dni = ? AND password = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.setString(2, contra);
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException e){
+            System.err.println("Error al buscar comprador: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Comprador");
+        }
+        return false;
+    }
+    
     public void habilitarComprador(int id) {
         String sql = "UPDATE comprador SET estado= 1 WHERE dni = ?";
 
@@ -117,4 +132,48 @@ public class CompradorData {
         }
     }
 
+    public void modificarComprador(Boolean estado, String nombre, int dni) {
+        String sql = "UPDATE comprador SET estado = ? , nombre = ? WHERE dni = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setBoolean(1, estado);
+            ps.setString(2, nombre);
+            ps.setInt(3, dni);
+            
+            int n = ps.executeUpdate();
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Comprador modificado con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró comprador a modificar.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al modificar comprador: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comprador.");
+        }
+
+    }
+
+    public List<Comprador> listarCompradores() {
+        List<Comprador> compradores = new ArrayList<>();
+        String sql = "SELECT dni, nombre, fechaNac, password, medioDePago, estado FROM comprador";
+
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Comprador usuario = new Comprador();
+                usuario.setDni(rs.getInt("dni"));
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setFechaNacimiento(rs.getDate("fechaNac"));
+                usuario.setPassword(rs.getString("password"));
+                usuario.setMedioDePago(rs.getString("medioDePago"));
+                usuario.setEstado(rs.getBoolean("estado"));
+                compradores.add(usuario);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar compradores: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar compradores: " + e.getMessage());
+        }
+
+        return compradores;
+    }
 }

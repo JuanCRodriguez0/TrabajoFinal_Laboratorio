@@ -4,17 +4,24 @@
  */
 package Vista;
 
-/**
- *
- * @author Jeremias
- */
+import Modelo.Comprador;
+import Persistencia.CompradorData;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 public class modificarUsuario extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form modificarUsuario
      */
-    public modificarUsuario() {
+    public modificarUsuario() throws SQLException {
         initComponents();
+        tablaCompradores();
     }
 
     /**
@@ -27,52 +34,52 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        buscarDNI = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonConfirmar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         usuarioNombre = new javax.swing.JTextField();
         comboEstado = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
+        botonVolver = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
-        jLabel1.setText("Ingrese el DNI");
-
-        jButton1.setText("Confirmar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonConfirmar.setText("Confirmar");
+        botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonConfirmarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Salir");
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nombre", "Estado"
+                "Nombre", "Estado", "DNI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLabel2.setText("Nombre");
@@ -80,24 +87,26 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado");
 
         comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitar", "Deshabilitar" }));
+        comboEstado.setSelectedIndex(-1);
 
-        jButton4.setText("Volver");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botonVolver.setText("Volver");
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botonVolverActionPerformed(evt);
             }
         });
 
-        jDesktopPane1.setLayer(buscarDNI, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setText("Modificar Usuario");
+
+        jDesktopPane1.setLayer(botonConfirmar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(usuarioNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(comboEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(botonVolver, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -106,19 +115,6 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton3)
-                        .addGap(36, 36, 36))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(45, Short.MAX_VALUE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -129,17 +125,27 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comboEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(botonConfirmar)
+                                .addGap(463, 463, 463)
+                                .addComponent(botonVolver))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(45, Short.MAX_VALUE))))
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(245, 245, 245)
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(buscarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(jLabel3)
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,9 +156,8 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
                     .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(botonConfirmar)
+                    .addComponent(botonVolver))
                 .addGap(37, 37, 37))
         );
 
@@ -170,24 +175,78 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
+        int fila = -1;
+        Boolean estadoST = true;
+        int estado = -1;
+        fila = jTable1.getSelectedRow();
+        if (fila != -1) {
+            String nombre = usuarioNombre.getText();
+            estado = comboEstado.getSelectedIndex();
+            estadoST = true;
+            switch (estado) {
+                case 0:
+                    estadoST = true;
+                    break;
+                case 1:
+                    estadoST = false;
+                    break;
+            }
+            CompradorData cd = null;
+            try {
+                cd = new CompradorData();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos.");
+            }
+            
+            cd.modificarComprador(estadoST, nombre, (int)jTable1.getValueAt(fila, 2));
+            
+            try {
+                tablaCompradores();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,"Error al acceder a la tabla.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario.");
+        }
+    }//GEN-LAST:event_botonConfirmarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botonVolverActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int fila = jTable1.getSelectedRow();
+        usuarioNombre.setText((String)jTable1.getValueAt(fila, 0));
+        Boolean estado = (Boolean)jTable1.getValueAt(fila, 1);
+        if(estado){
+            comboEstado.setSelectedIndex(0);
+        }else{
+            comboEstado.setSelectedIndex(1);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
+    public void tablaCompradores() throws SQLException {
+        List<Comprador> compra = new CompradorData().listarCompradores();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Estado");
+        modelo.addColumn("DNI");
+
+        for (Comprador c : compra) {
+            modelo.addRow(new Object[]{
+                c.getNombre(), c.getEstado(), c.getDni()
+            });
+        }
+        jTable1.setModel(modelo);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField buscarDNI;
+    private javax.swing.JButton botonConfirmar;
+    private javax.swing.JButton botonVolver;
     private javax.swing.JComboBox<String> comboEstado;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

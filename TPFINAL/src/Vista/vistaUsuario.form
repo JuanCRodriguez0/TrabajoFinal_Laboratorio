@@ -30,8 +30,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jDesktopPane1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,9 +45,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="254" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jButton10" min="-2" pref="172" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="172" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="172" max="-2" attributes="0"/>
+                      <Component id="botonVerCartelera" min="-2" pref="172" max="-2" attributes="0"/>
+                      <Component id="botonVerTickets" min="-2" pref="172" max="-2" attributes="0"/>
+                      <Component id="botonModificarContraseña" min="-2" pref="172" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="260" max="32767" attributes="0"/>
               </Group>
@@ -69,14 +69,14 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="86" max="32767" attributes="0"/>
+                  <EmptySpace pref="48" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="39" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                  <Component id="jButton10" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonVerCartelera" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonVerTickets" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonModificarContraseña" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -85,20 +85,20 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="botonVerTickets">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Tickets"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerTicketsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="botonModificarContrase&#xf1;a">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Modificar Usuario"/>
+            <Property name="text" type="java.lang.String" value="Modificar Contrase&#xf1;a"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonModificarContrase&#xf1;aActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton5">
@@ -114,12 +114,12 @@
             <Property name="text" type="java.lang.String" value="Bienvenido Usuario!"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton10">
+        <Component class="javax.swing.JButton" name="botonVerCartelera">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Cartelera"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerCarteleraActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

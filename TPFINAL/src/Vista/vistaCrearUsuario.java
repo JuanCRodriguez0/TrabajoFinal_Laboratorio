@@ -4,6 +4,11 @@
  */
 package Vista;
 
+import Modelo.Comprador;
+import Persistencia.CompradorData;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Juan Cruz
@@ -34,50 +39,72 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         contra2 = new javax.swing.JPasswordField();
         contra1 = new javax.swing.JPasswordField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jTextDNI = new javax.swing.JTextField();
+        jTextNombre = new javax.swing.JTextField();
+        botonVolver = new javax.swing.JButton();
+        botonConfirmar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateFechaNac = new com.toedter.calendar.JDateChooser();
+        mostrarContra = new javax.swing.JCheckBox();
+        jLabel7 = new javax.swing.JLabel();
+        medioPago = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("DNI:");
 
-        jLabel3.setText("Password:");
+        jLabel3.setText("Contraseña:");
 
-        jLabel4.setText("Repite password:");
+        jLabel4.setText("Repite contraseña:");
 
         jLabel5.setText("Fecha Nacimiento:");
 
         contra2.setText("jPasswo");
+        contra2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contra2MouseClicked(evt);
+            }
+        });
 
         contra1.setText("jPasswo");
-
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        contra1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                contra1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonVolver.setText("Volver");
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonVolverActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Confirmar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonConfirmar.setText("Confirmar");
+        botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonConfirmarActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Crear Usuario");
+
+        mostrarContra.setText("Mostrar contraseña");
+        mostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarContraMouseClicked(evt);
+            }
+        });
+        mostrarContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarContraActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Medio de pago:");
+
+        medioPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta Credito" }));
+        medioPago.setSelectedIndex(-1);
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -86,24 +113,38 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(contra2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(contra1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jTextDNI, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jTextNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(botonVolver, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(botonConfirmar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jDateChooser1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jDateFechaNac, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(mostrarContra, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(medioPago, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(jLabel6)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(40, 40, 40))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(botonVolver)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(mostrarContra)
+                        .addGap(73, 73, 73))))
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(164, 164, 164)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,29 +152,23 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
                 .addGap(37, 37, 37)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                            .addComponent(jTextNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(contra1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                                 .addComponent(contra2)
-                                .addComponent(jTextField1)))
+                                .addComponent(jTextDNI)))
                         .addGap(204, 204, 204))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(medioPago, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateFechaNac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(jLabel6)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,30 +178,34 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
                 .addGap(62, 62, 62)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(contra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(1, 1, 1)
+                .addComponent(mostrarContra)
+                .addGap(1, 1, 1)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(contra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(44, 44, 44)
+                    .addComponent(jDateFechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(30, 30, 30))
+                    .addComponent(jLabel7)
+                    .addComponent(medioPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(botonConfirmar)
+                .addGap(47, 47, 47)
+                .addComponent(botonVolver)
+                .addGap(27, 27, 27))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,26 +222,89 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botonVolverActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (!jTextNombre.getText().equals("") && !jTextDNI.getText().equals("") && !contra1.getPassword().equals("") && !contra2.getPassword().equals("")
+                && jDateFechaNac.getDate() != null && medioPago.getSelectedIndex() != -1) {
+
+            String nombre = jTextNombre.getText();
+            int dni = Integer.parseInt(jTextDNI.getText());
+            char[] contraArreglo = contra1.getPassword();
+            String contraST = new String(contraArreglo);
+            char[] contraArreglo2 = contra2.getPassword();
+            String contraST2 = new String(contraArreglo2);
+            Date fechaNac = jDateFechaNac.getDate();
+            int mp = medioPago.getSelectedIndex();
+            String medioPagoST = "";
+            switch (mp) {
+                case 0:
+                    medioPagoST = "Efectivo";
+                    break;
+                case 1:
+                    medioPagoST = "Tarjeta Credito";
+                    break;
+            }
+
+            if (contraST.equalsIgnoreCase(contraST2)) {
+                //int dni, String nombre, Date fechaNacimiento, String password, String medioDePago
+                Comprador comprador = new Comprador(dni, nombre, fechaNac, contraST,medioPagoST, true);
+                CompradorData cp = null;
+                try {
+                    cp = new CompradorData();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
+                }
+                cp.crearComprador(comprador);
+                
+                jTextNombre.setText("");
+                jTextDNI.setText("");
+                contra1.setText("");
+                contra2.setText("");
+                jDateFechaNac.setDate(null);
+                medioPago.setSelectedIndex(-1);
+            } else {
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden.");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");
+        }
+        
+
+    }//GEN-LAST:event_botonConfirmarActionPerformed
+
+    private void contra1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contra1MouseClicked
+        contra1.setText("");
+    }//GEN-LAST:event_contra1MouseClicked
+
+    private void contra2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contra2MouseClicked
+        contra2.setText("");
+    }//GEN-LAST:event_contra2MouseClicked
+
+    private void mostrarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarContraMouseClicked
+        
+    }//GEN-LAST:event_mostrarContraMouseClicked
+
+    private void mostrarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarContraActionPerformed
+        if(mostrarContra.isSelected()){
+            contra1.setEchoChar((char)0);
+            contra2.setEchoChar((char)0);
+        }else{
+            contra1.setEchoChar('*');
+            contra2.setEchoChar('*');
+        }
+    }//GEN-LAST:event_mostrarContraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonConfirmar;
+    private javax.swing.JButton botonVolver;
     private javax.swing.JPasswordField contra1;
     private javax.swing.JPasswordField contra2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateFechaNac;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -210,7 +312,10 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField jTextDNI;
+    private javax.swing.JTextField jTextNombre;
+    private javax.swing.JComboBox<String> medioPago;
+    private javax.swing.JCheckBox mostrarContra;
     // End of variables declaration//GEN-END:variables
 }

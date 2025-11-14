@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/facun/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Vista/crearPelicula.java</file>
-            <file>file:/C:/Users/facun/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Persistencia/PeliculaData.java</file>
-            <file>file:/C:/Users/facun/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Vista/vistaCrearUsuario.java</file>
-            <file>file:/C:/Users/facun/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Vista/verTicketsAdmin.java</file>
-            <file>file:/C:/Users/facun/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Modelo/Pelicula.java</file>
+            <file>file:/C:/Users/Juan%20Cruz/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Vista/vistaCartelera.java</file>
+            <file>file:/C:/Users/Juan%20Cruz/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Vista/modificarContrasena.java</file>
+            <file>file:/C:/Users/Juan%20Cruz/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Vista/vistaUsuario.java</file>
+            <file>file:/C:/Users/Juan%20Cruz/OneDrive/Documentos/GitHub/TrabajoFinal_Laboratorio/TPFINAL/src/Persistencia/DetalleTicketData.java</file>
         </group>
     </open-files>
 </project-private>

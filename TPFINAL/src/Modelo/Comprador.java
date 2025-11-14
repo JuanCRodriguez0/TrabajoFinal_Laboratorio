@@ -1,24 +1,27 @@
 package Modelo;
 
-import java.time.LocalDate;
+import java.util.Date;
+
+
 
 public class Comprador {
-    private int idComprador; // SI O NO?
     private int dni;
     private String nombre;
-    private LocalDate fechaNacimiento;
+    private Date fechaNacimiento;
     private String password;
     private String medioDePago;
+    private Boolean estado;
 
     public Comprador() {
     }
 
-    public Comprador(int dni, String nombre, LocalDate fechaNacimiento, String password, String medioDePago) {
+    public Comprador(int dni, String nombre, Date fechaNacimiento, String password, String medioDePago, Boolean estado) {
         this.dni = dni;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.password = password;
         this.medioDePago = medioDePago;
+        this.estado = estado;
     }
 
     public int getDni() {
@@ -29,6 +32,14 @@ public class Comprador {
         this.dni = dni;
     }
 
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -37,11 +48,11 @@ public class Comprador {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

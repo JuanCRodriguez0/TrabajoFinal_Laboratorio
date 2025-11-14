@@ -23,23 +23,23 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonVerTickets = new javax.swing.JButton();
+        botonModificarContraseña = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
+        botonVerCartelera = new javax.swing.JButton();
 
-        jButton2.setText("Ver Tickets");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonVerTickets.setText("Ver Tickets");
+        botonVerTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonVerTicketsActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Modificar Usuario");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        botonModificarContraseña.setText("Modificar Contraseña");
+        botonModificarContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botonModificarContraseñaActionPerformed(evt);
             }
         });
 
@@ -52,18 +52,18 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Bienvenido Usuario!");
 
-        jButton10.setText("Ver Cartelera");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        botonVerCartelera.setText("Ver Cartelera");
+        botonVerCartelera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                botonVerCarteleraActionPerformed(evt);
             }
         });
 
-        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(botonVerTickets, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(botonModificarContraseña, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(botonVerCartelera, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -72,9 +72,9 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(254, 254, 254)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonVerCartelera, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonVerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonModificarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 260, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -89,14 +89,14 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
-                .addComponent(jButton10)
+                .addComponent(botonVerCartelera)
                 .addGap(42, 42, 42)
-                .addComponent(jButton2)
+                .addComponent(botonVerTickets)
                 .addGap(41, 41, 41)
-                .addComponent(jButton3)
+                .addComponent(botonModificarContraseña)
                 .addGap(142, 142, 142)
                 .addComponent(jButton5)
                 .addContainerGap())
@@ -115,42 +115,42 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1)
-                .addContainerGap())
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonVerTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerTicketsActionPerformed
         jDesktopPane1.repaint();
         verTickets aux = new verTickets();
         aux.setVisible(true);
         jDesktopPane1.add(aux);
         jDesktopPane1.moveToFront(aux); 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonVerTicketsActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botonModificarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarContraseñaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botonModificarContraseñaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void botonVerCarteleraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerCarteleraActionPerformed
         jDesktopPane1.repaint();
         vistaCartelera aux = new vistaCartelera();
         aux.setVisible(true);
         jDesktopPane1.add(aux);
         jDesktopPane1.moveToFront(aux); 
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_botonVerCarteleraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botonModificarContraseña;
+    private javax.swing.JButton botonVerCartelera;
+    private javax.swing.JButton botonVerTickets;
     private javax.swing.JButton jButton5;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;

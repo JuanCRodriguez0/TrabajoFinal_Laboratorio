@@ -1,6 +1,5 @@
 package Modelo;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Pelicula {
@@ -26,6 +25,7 @@ public class Pelicula {
         this.estreno = estreno;
         this.enCartelera = enCartelera;
     }
+    
 
     public int getIdPelicula() {
         return idPelicula;

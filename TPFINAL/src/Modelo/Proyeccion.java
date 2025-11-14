@@ -1,48 +1,48 @@
 package Modelo;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 public class Proyeccion {
     private int codProyeccion;
-    private Pelicula pelicula;
-    private Sala sala;
+    private int peliId;
+    private int salaId;
     private String idioma;
     private boolean es3D;
     private boolean subtitulada;
-    private Date horaInicio;
-    private Date horaFin;
+    private String horaInicio;
+    private String horaFin;
     private int lugaresDisponibles;
     private double precioDelLugar;
 
     public Proyeccion() {
     }
 
-    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, Date horaInicio, Date horaFin, int lugaresDisponibles, double precioDelLugar) {
+    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, String horaInicio, String horaFin, double precioDelLugar, int peliId, int salaId) {
         this.idioma = idioma;
         this.es3D = es3D;
         this.subtitulada = subtitulada;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
-        this.lugaresDisponibles = lugaresDisponibles;
+        this.lugaresDisponibles = 25;
         this.precioDelLugar = precioDelLugar;
+        this.peliId = peliId;
+        this.salaId = salaId;
     }
 
-    public Pelicula getPelicula() {
-        return pelicula;
+    public int getPeliId() {
+        return peliId;
     }
 
-    public void setPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
+    public void setPeliId(int peliId) {
+        this.peliId = peliId;
     }
 
-    public Sala getSala() {
-        return sala;
+    public int getSalaId() {
+        return salaId;
     }
 
-    public void setSala(Sala sala) {
-        this.sala = sala;
+    public void setSalaId(int salaId) {
+        this.salaId = salaId;
     }
+
 
     public int getCodProyeccion() {
         return codProyeccion;
@@ -51,10 +51,6 @@ public class Proyeccion {
     public void setCodProyeccion(int codProyeccion) {
         this.codProyeccion = codProyeccion;
     }
-
-   
-
-    
 
     public String getIdioma() {
         return idioma;
@@ -80,19 +76,19 @@ public class Proyeccion {
         this.subtitulada = subtitulada;
     }
 
-    public Date getHoraInicio() {
+    public String getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Date horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Date getHoraFin() {
+    public String getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Date horaFin) {
+    public void setHoraFin(String horaFin) {
         this.horaFin = horaFin;
     }
 
@@ -114,7 +110,7 @@ public class Proyeccion {
 
     @Override
     public String toString() {
-        return "Proyeccion{" + "codProyeccion=" + codProyeccion + ", pelicula=" + pelicula + ", sala=" + sala + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + '}';
+        return "Proyeccion{" + "codProyeccion=" + codProyeccion + ", pelicula=" +  peliId + ", sala=" + salaId + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + '}';
     }
 
    
