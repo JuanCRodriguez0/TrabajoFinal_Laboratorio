@@ -8,10 +8,10 @@ import Modelo.Comprador;
 import Persistencia.CompradorData;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class modificarUsuario extends javax.swing.JInternalFrame {
@@ -85,6 +85,12 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
         jLabel2.setText("Nombre");
 
         jLabel5.setText("Estado");
+
+        usuarioNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioNombreActionPerformed(evt);
+            }
+        });
 
         comboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitar", "Deshabilitar" }));
         comboEstado.setSelectedIndex(-1);
@@ -225,6 +231,10 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
             comboEstado.setSelectedIndex(1);
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void usuarioNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuarioNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usuarioNombreActionPerformed
 
     public void tablaCompradores() throws SQLException {
         List<Comprador> compra = new CompradorData().listarCompradores();
