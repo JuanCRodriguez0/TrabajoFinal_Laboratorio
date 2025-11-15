@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package Vista;
 
 import java.sql.SQLException;
@@ -9,8 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author Jeremias
+ * @author Grupo 11
  */
 public class vistaAdmin extends javax.swing.JInternalFrame {
 
@@ -198,12 +193,15 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        jDesktopPane1.repaint();
-        modificarPelicula aux = new modificarPelicula();
-        aux.setVisible(true);
-        jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux);
+        try {
+            jDesktopPane1.repaint();
+            modificarPelicula aux = new modificarPelicula();
+            aux.setVisible(true);
+            jDesktopPane1.add(aux);
+            jDesktopPane1.moveToFront(aux);
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -219,7 +217,6 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
         jDesktopPane1.repaint();
         modificarProyeccion aux = new modificarProyeccion();
         aux.setVisible(true);
@@ -245,7 +242,6 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-
         try { // acá le tuve que meter este try-catch porque sino me daba error xd por lo pronto no tira ningún error y esperemos que no lo haga nunca jajsj
             jDesktopPane1.repaint();
             crearPelicula aux = new crearPelicula();
@@ -267,17 +263,16 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-
-        jDesktopPane1.repaint();
-        crearSala aux = null;
         try {
-            aux = new crearSala();
+            jDesktopPane1.repaint();
+            crearSala aux = new crearSala();
+            aux.setVisible(true);
+            jDesktopPane1.add(aux);
+            jDesktopPane1.moveToFront(aux);
         } catch (SQLException ex) {
-            Logger.getLogger(vistaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error " + ex.getMessage());
         }
-        aux.setVisible(true);
-        jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux);
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

@@ -313,7 +313,7 @@ public class crearPelicula extends javax.swing.JInternalFrame {
             try {
                 fechin = jDateChooser1.getDate();
             } catch (NullPointerException e) {
-                JOptionPane.showMessageDialog(this, "Deberias cargar los datos.");
+                JOptionPane.showMessageDialog(this, "No puede no seleccionar una fecha.");
             }
 
             int enCartelera = comboEstado3.getSelectedIndex();

@@ -9,11 +9,13 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author Grupo 11
  */
+
 public class PeliculaData {
 
     private Connection con = null;
@@ -119,7 +121,7 @@ public class PeliculaData {
         return pelicula;
     }
 
-    public void modificarPelicula(Pelicula pelicula) {
+    public void modificarPelicula(Pelicula pelicula, String titulo, String director, String actores, String origen, String genero, Date estreno, Boolean enCartelera) {
         java.sql.Date fechaSQL = new java.sql.Date(pelicula.getEstreno().getTime());
         String sql = "UPDATE pelicula SET titulo = ?, director = ?, actores = ?, origen = ?, genero = ?, estreno = ?, enCartelera = ? WHERE idPelicula = ? ";
 
