@@ -12,6 +12,8 @@ import Persistencia.ProyeccionData;
 import Persistencia.SalaData;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,7 +21,7 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
 
     public crearProyeccion() throws SQLException {
         initComponents();
-        tablaPeliculas();
+        tablaProyecciones();
         rellenarComboBoxPeliculas();
         jComboBox3.setSelectedIndex(-1);
         rellenarComboBoxSala();
@@ -378,6 +380,11 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
             jComboBox3.setSelectedIndex(-1);
             jComboBox4.setSelectedIndex(-1);
             usuarioNombre1.setText("");
+            try {
+                tablaProyecciones();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error al recargar tabla proyecciones.");
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");
         }
@@ -387,7 +394,7 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public void tablaPeliculas() throws SQLException {
+    public void tablaProyecciones() throws SQLException {
         List<Proyeccion> proy = new ProyeccionData().listarProyecciones();
 
         DefaultTableModel modelo = new DefaultTableModel();

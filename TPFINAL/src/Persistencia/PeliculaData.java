@@ -122,18 +122,18 @@ public class PeliculaData {
     }
 
     public void modificarPelicula(Pelicula pelicula, String titulo, String director, String actores, String origen, String genero, Date estreno, Boolean enCartelera) {
-        java.sql.Date fechaSQL = new java.sql.Date(pelicula.getEstreno().getTime());
+        java.sql.Date fechaSQL = new java.sql.Date(estreno.getTime());
         String sql = "UPDATE pelicula SET titulo = ?, director = ?, actores = ?, origen = ?, genero = ?, estreno = ?, enCartelera = ? WHERE idPelicula = ? ";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, pelicula.getTitulo());
-            ps.setString(2, pelicula.getDirector());
-            ps.setString(3, pelicula.getActores());
-            ps.setString(4, pelicula.getOrigen());
-            ps.setString(5, pelicula.getGenero());
+            ps.setString(1, titulo);
+            ps.setString(2, director);
+            ps.setString(3,actores);
+            ps.setString(4,origen);
+            ps.setString(5, genero);
             ps.setDate(6, fechaSQL);
-            ps.setBoolean(7, pelicula.isEnCartelera());
+            ps.setBoolean(7,enCartelera);
             ps.setInt(8, pelicula.getIdPelicula());
 
             int n = ps.executeUpdate();
@@ -152,7 +152,7 @@ public class PeliculaData {
     public List<Pelicula> listarPeliculas() {
         List<Pelicula> peliculas = new ArrayList<>();
 
-        String sql = "SELECT idPelicula, titulo, director, actores, genero, estreno, enCartelera "
+        String sql = "SELECT idPelicula, titulo, director, actores, origen, genero, estreno, enCartelera "
                 + "FROM pelicula";
 
         try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
@@ -162,6 +162,7 @@ public class PeliculaData {
                 pelicula.setTitulo(rs.getString("titulo"));
                 pelicula.setDirector(rs.getString("director"));
                 pelicula.setActores(rs.getString("actores"));
+                pelicula.setOrigen(rs.getString("origen"));
                 pelicula.setGenero(rs.getString("genero"));
                 pelicula.setEstreno(rs.getDate("estreno"));
                 pelicula.setEnCartelera(rs.getBoolean("enCartelera"));

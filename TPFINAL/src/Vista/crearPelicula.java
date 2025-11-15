@@ -73,17 +73,17 @@ public class crearPelicula extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "Director", "Actores", "Genero", "Estreno", "En cartelera"
+                "Titulo", "Director", "Actores", "Origen", "Genero", "Estreno", "En cartelera"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -98,6 +98,7 @@ public class crearPelicula extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jLabel2.setText("Actores");
@@ -384,13 +385,14 @@ public class crearPelicula extends javax.swing.JInternalFrame {
         modelo.addColumn("Titulo");
         modelo.addColumn("Director");
         modelo.addColumn("Actores");
+        modelo.addColumn("Origen");
         modelo.addColumn("Genero");
         modelo.addColumn("Estreno");
         modelo.addColumn("En Cartelera");
 
         for (Pelicula p : pelis) {
             modelo.addRow(new Object[]{
-                p.getTitulo(), p.getDirector(), p.getActores(), p.getGenero(), p.getEstreno(), p.isEnCartelera()
+                p.getTitulo(), p.getDirector(), p.getActores(), p.getOrigen(), p.getGenero(), p.getEstreno(), p.isEnCartelera()
             });
         }
 

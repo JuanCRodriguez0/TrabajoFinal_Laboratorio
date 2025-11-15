@@ -19,6 +19,7 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
     public modificarPelicula() throws SQLException {
         initComponents();
         tablaPeliculas();
+        estreno_JDC.setDate(new Date());
     }
 
     /**
@@ -48,8 +49,8 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         actores_JTF = new javax.swing.JTextField();
         origen_JTF = new javax.swing.JTextField();
-        genero_JTF = new javax.swing.JTextField();
         estreno_JDC = new com.toedter.calendar.JDateChooser();
+        GeneroComboX = new javax.swing.JComboBox<>();
 
         jButton1.setText("Confirmar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -60,17 +61,17 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Título", "Director", "Actores", "Origen", "Género", "Estreno", "En cartelera"
+                "ID", "Título", "Director", "Actores", "Origen", "Género", "Estreno", "En cartelera"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -91,6 +92,7 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
         }
 
         jLabel2.setText("Título:");
@@ -119,6 +121,14 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Género:");
 
+        GeneroComboX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Infantil", "Terror", "Comedia", "Drama", "Suspenso", "Acción" }));
+        GeneroComboX.setToolTipText("");
+        GeneroComboX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GeneroComboXActionPerformed(evt);
+            }
+        });
+
         jDesktopPane1.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -135,8 +145,8 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
         jDesktopPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(actores_JTF, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(origen_JTF, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(genero_JTF, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(estreno_JDC, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(GeneroComboX, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -179,7 +189,7 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDesktopPane1Layout.createSequentialGroup()
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(genero_JTF, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(GeneroComboX, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,18 +223,19 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(genero_JTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(GeneroComboX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(estreno_JDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enCartelera_JCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton4)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(enCartelera_JCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(71, 71, 71))
         );
 
@@ -243,52 +254,87 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int fila = -1;
-        fila = jTable1.getSelectedRow();
+        if (!titulo_JTF.getText().isEmpty() && !director_JTF.getText().equals("") && !actores_JTF.getText().isEmpty() && !origen_JTF.getText().isEmpty()
+                &&  GeneroComboX.getSelectedIndex() != -1 && enCartelera_JCB.getSelectedIndex() != -1) {
 
-        String titulo = titulo_JTF.getText();
-        String director = director_JTF.getText();
-        String actores = actores_JTF.getText();
-        String origen = origen_JTF.getText();
-        String genero = genero_JTF.getText();
-        Date estreno = estreno_JDC.getDate();
+            int fila = -1;
+            fila = jTable1.getSelectedRow();
 
-        Boolean enCarteleraST = true;
-        int enCartelera = -1;
-        enCartelera = enCartelera_JCB.getSelectedIndex();
+            String titulo = titulo_JTF.getText();
+            String director = director_JTF.getText();
+            String actores = actores_JTF.getText();
+            String origen = origen_JTF.getText();
+             int genero = GeneroComboX.getSelectedIndex();
+            String generoSt = "";
 
-        switch (enCartelera) {
-            case 0:
-                enCarteleraST = true;
-                break;
-            case 1:
-                enCarteleraST = false;
-                break;
-        }
-        
-        if (fila != -1) {
-            
-            PeliculaData pd = null;
-            Pelicula p = null;
-            
-            try {
-                pd = new PeliculaData();
-                p = new Pelicula();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos.");
+            switch (genero) {
+                case 0:
+                    generoSt = "Infantil";
+                    break;
+                case 1:
+                    generoSt = "Terror";
+                    break;
+                case 2:
+                    generoSt = "Comedia";
+                    break;
+                case 3:
+                    generoSt = "Drama";
+                    break;
+                case 4:
+                    generoSt = "Suspenso";
+                    break;
+                case 5:
+                    generoSt = "Acción";
+                    break;
             }
-            
-            pd.modificarPelicula(p, titulo, director, actores, origen, genero, estreno, enCarteleraST);
-            
+
+            Boolean enCarteleraST = true;
+            int enCartelera = -1;
+            enCartelera = enCartelera_JCB.getSelectedIndex();
+
+            Date estreno = new Date();
             try {
-                tablaPeliculas();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla.");
+                estreno = estreno_JDC.getDate();
+            } catch (NullPointerException e) {
+                JOptionPane.showMessageDialog(this, "No puede no seleccionar una fecha.");
+            }
+
+            switch (enCartelera) {
+                case 0:
+                    enCarteleraST = true;
+                    break;
+                case 1:
+                    enCarteleraST = false;
+                    break;
+            }
+
+            if (fila != -1) {
+
+                PeliculaData pd = null;
+                Pelicula p = new Pelicula();
+
+                int idPelicula = (Integer) jTable1.getValueAt(fila, 0);
+                p.setIdPelicula(idPelicula);
+
+                try {
+                    pd = new PeliculaData();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Error al acceder a la base de datos.");
+                }
+
+                pd.modificarPelicula(p, titulo, director, actores, origen, generoSt, estreno, enCarteleraST);
+
+                try {
+                    tablaPeliculas();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al acceder a la tabla.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una película.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una película.");
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -297,15 +343,37 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int fila = jTable1.getSelectedRow();
+
         
-        titulo_JTF.setText((String) jTable1.getValueAt(fila, 0));
-        director_JTF.setText((String) jTable1.getValueAt(fila, 1));
-        actores_JTF.setText((String) jTable1.getValueAt(fila, 2));
-        origen_JTF.setText((String) jTable1.getValueAt(fila, 3));
-        genero_JTF.setText((String) jTable1.getValueAt(fila, 4));
-        estreno_JDC.setDate((Date) jTable1.getValueAt(fila, 5));
-        Boolean enCarteleraST = (Boolean) jTable1.getValueAt(fila, 6);
+        titulo_JTF.setText((String) jTable1.getValueAt(fila, 1));
+        director_JTF.setText((String) jTable1.getValueAt(fila, 2));
+        actores_JTF.setText((String) jTable1.getValueAt(fila, 3));
+        origen_JTF.setText((String) jTable1.getValueAt(fila, 4));
+        String generito = (String)jTable1.getValueAt(fila, 5);
         
+        switch (generito) { //Infantil, Terror, Comedia, Drama, Suspenso, Acción
+                case "Infantil":
+                    GeneroComboX.setSelectedIndex(0);
+                    break;
+                case "Terror":
+                    GeneroComboX.setSelectedIndex(1);
+                    break;
+                case "Comedia":
+                    GeneroComboX.setSelectedIndex(2);
+                    break;
+                case "Drama":
+                    GeneroComboX.setSelectedIndex(3);
+                    break;
+                case "Suspenso":
+                    GeneroComboX.setSelectedIndex(4);
+                    break;
+                case "Acción":
+                    GeneroComboX.setSelectedIndex(5);
+                    break;
+            }
+        estreno_JDC.setDate((Date) jTable1.getValueAt(fila, 6));
+        Boolean enCarteleraST = (Boolean) jTable1.getValueAt(fila, 7);
+
         if (enCarteleraST) {
             enCartelera_JCB.setSelectedIndex(0);
         } else {
@@ -313,9 +381,14 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void GeneroComboXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GeneroComboXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GeneroComboXActionPerformed
+
     public void tablaPeliculas() throws SQLException {
         List<Pelicula> pelis = new PeliculaData().listarPeliculas();
         DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
         modelo.addColumn("Titulo");
         modelo.addColumn("Director");
         modelo.addColumn("Actores");
@@ -326,18 +399,18 @@ public class modificarPelicula extends javax.swing.JInternalFrame {
 
         for (Pelicula p : pelis) {
             modelo.addRow(new Object[]{
-                p.getTitulo(), p.getDirector(), p.getActores(), p.getOrigen(), p.getGenero(), p.getEstreno(), p.isEnCartelera()
+                p.getIdPelicula(), p.getTitulo(), p.getDirector(), p.getActores(), p.getOrigen(), p.getGenero(), p.getEstreno(), p.isEnCartelera()
             });
         }
         jTable1.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> GeneroComboX;
     private javax.swing.JTextField actores_JTF;
     private javax.swing.JTextField director_JTF;
     private javax.swing.JComboBox<String> enCartelera_JCB;
     private com.toedter.calendar.JDateChooser estreno_JDC;
-    private javax.swing.JTextField genero_JTF;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
