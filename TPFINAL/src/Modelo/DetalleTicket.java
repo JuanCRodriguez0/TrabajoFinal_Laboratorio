@@ -4,19 +4,23 @@ import java.util.ArrayList;
 
 public class DetalleTicket {
     private int codD;
-    private Proyeccion proyeccion;
-    private ArrayList<Asiento> asiento;
+    //private Proyeccion proyeccion;//deberia ser id de proyeccion
+    private int idProyeccion;
+    //private ArrayList<Asiento> asiento;
     private int cant;
     private double subtotal;
-    private Ticket ticket;
+    private int idTicket;
+    private int codAsiento;
+    private int codAsiento2;
+    //private Ticket ticket;
 
-    public DetalleTicket(int codD, Proyeccion proyeccion, ArrayList<Asiento> asiento, int cant, double subtotal, Ticket ticket) {
-        this.codD = codD;
-        this.proyeccion = proyeccion;
-        this.asiento = asiento;
+    public DetalleTicket(int idProyeccion, int cant, double subtotal, int idTicket, int codAsiento, int codAsiento2) {
+        this.idProyeccion = idProyeccion;
         this.cant = cant;
         this.subtotal = subtotal;
-        this.ticket = ticket;
+        this.idTicket = idTicket;
+        this.codAsiento = codAsiento;
+        this.codAsiento2 = codAsiento2;
     }
 
     public int getCodD() {
@@ -27,20 +31,12 @@ public class DetalleTicket {
         this.codD = codD;
     }
 
-    public Proyeccion getProyeccion() {
-        return proyeccion;
+    public int getIdProyeccion() {
+        return idProyeccion;
     }
 
-    public void setProyeccion(Proyeccion proyeccion) {
-        this.proyeccion = proyeccion;
-    }
-
-    public ArrayList<Asiento> getAsiento() {
-        return asiento;
-    }
-
-    public void setAsiento(ArrayList<Asiento> asiento) {
-        this.asiento = asiento;
+    public void setIdProyeccion(int idProyeccion) {
+        this.idProyeccion = idProyeccion;
     }
 
     public int getCant() {
@@ -59,20 +55,35 @@ public class DetalleTicket {
         this.subtotal = subtotal;
     }
 
-    public Ticket getTicket() {
-        return ticket;
+    public int getIdTicket() {
+        return idTicket;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setIdTicket(int idTicket) {
+        this.idTicket = idTicket;
+    }
+
+    public int getCodAsiento() {
+        return codAsiento;
+    }
+
+    public void setCodAsiento(int codAsiento) {
+        this.codAsiento = codAsiento;
+    }
+
+    public int getCodAsiento2() {
+        return codAsiento2;
+    }
+
+    public void setCodAsiento2(int codAsiento2) {
+        this.codAsiento2 = codAsiento2;
     }
 
     @Override
     public String toString() {
-        return "DetalleTicket{" + "codD=" + codD + ", proyeccion=" + proyeccion + ", asiento=" + asiento + ", cant=" + cant + ", subtotal=" + subtotal + ", ticket=" + ticket + '}';
+        return "DetalleTicket{" + "codD=" + codD + ", idProyeccion=" + idProyeccion + ", cant=" + cant + ", subtotal=" + subtotal + ", idTicket=" + idTicket + ", codAsiento=" + codAsiento + ", codAsiento2=" + codAsiento2 + '}';
     }
     
     
-       
-    
+
 }

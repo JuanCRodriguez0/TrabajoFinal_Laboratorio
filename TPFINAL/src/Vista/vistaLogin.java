@@ -15,7 +15,6 @@ public class vistaLogin extends javax.swing.JInternalFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         botonVolver = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         botonIniciarSesion = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         textUsuario = new javax.swing.JTextField();
@@ -30,8 +29,6 @@ public class vistaLogin extends javax.swing.JInternalFrame {
                 botonVolverActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Bienvenido Usuario!");
 
         botonIniciarSesion.setText("Iniciar Sesión");
         botonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +58,6 @@ public class vistaLogin extends javax.swing.JInternalFrame {
         });
 
         jDesktopPane1.setLayer(botonVolver, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(botonIniciarSesion, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(textUsuario, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -92,20 +88,13 @@ public class vistaLogin extends javax.swing.JInternalFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(162, 162, 162))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(267, 267, 267))))
+                .addComponent(jLabel5)
+                .addGap(162, 162, 162))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
@@ -196,7 +185,6 @@ public class vistaLogin extends javax.swing.JInternalFrame {
     private javax.swing.JButton botonVolver;
     private javax.swing.JPasswordField contra;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

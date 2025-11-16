@@ -26,10 +26,11 @@ public class TicketData {
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            ps.setDate(1, java.sql.Date.valueOf(ticket.getFechaCompra()));
+    
+        ps.setDate(1, java.sql.Date.valueOf(ticket.getFechaCompra()));
             ps.setDate(2, java.sql.Date.valueOf(ticket.getFechaFuncion()));
             ps.setDouble(3, ticket.getMonto());
-            ps.setInt(4, ticket.getComprador().getDni());
+            ps.setInt(4, ticket.getDniComprador());
             ps.setInt(5, ticket.getCodTicket());
             ps.executeUpdate();
 
@@ -63,7 +64,7 @@ public class TicketData {
                     ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
                     ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
                     ticket.setMonto(rs.getDouble("monto"));
-                    ticket.getComprador().setDni(Integer.parseInt("dni"));
+                    ticket.setDniComprador(Integer.parseInt("dni"));
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Ticket con ID " + id + " no encontrada.");
