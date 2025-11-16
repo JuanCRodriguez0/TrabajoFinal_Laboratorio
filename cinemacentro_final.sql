@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2025 a las 04:03:05
+-- Tiempo de generación: 16-11-2025 a las 21:08:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `cinemacentro`
 --
-CREATE DATABASE IF NOT EXISTS `cinemacentro` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+CREATE DATABASE IF NOT EXISTS `cinemacentro` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `cinemacentro`;
 
 -- --------------------------------------------------------
@@ -36,6 +36,25 @@ CREATE TABLE `asiento` (
   `estado` tinyint(4) NOT NULL,
   `codProyeccion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `asiento`
+--
+
+INSERT INTO `asiento` (`codAsiento`, `fila`, `numero`, `estado`, `codProyeccion`) VALUES
+(18, 'A', 2, 0, 5),
+(19, 'A', 1, 0, 5),
+(20, 'A', 2, 0, 16),
+(21, 'A', 3, 0, 16),
+(22, 'B', 3, 0, 16),
+(23, 'B', 4, 0, 16),
+(24, 'A', 4, 0, 16),
+(25, 'A', 5, 0, 16),
+(26, 'B', 3, 0, 5),
+(27, 'C', 3, 0, 5),
+(28, 'C', 4, 0, 5),
+(29, 'A', 3, 0, 5),
+(30, 'A', 4, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -59,7 +78,7 @@ CREATE TABLE `comprador` (
 INSERT INTO `comprador` (`dni`, `nombre`, `fechaNac`, `password`, `medioDePago`, `estado`) VALUES
 (22222222, 'Facundo Lopez Cozzella', '2000-11-17', 'facundo', 'Efectivo', 0),
 (40400400, 'Jeremias Sirur Flores', '1995-07-14', 'jeremias', 'Tarjeta Credito', 0),
-(42357107, 'Juan Rodriguez', '2000-01-23', 'juancruz', 'Efectivo', 0),
+(42357107, 'Juan Rodriguez', '2000-01-23', 'chester', 'Efectivo', 0),
 (44444222, 'Jeremias Hoyo', '2004-08-05', 'jeremias2', 'Tarjeta Credito', 0),
 (55555555, 'Agustino Mazza', '2000-04-20', 'agustin', 'Tarjeta Credito', 1);
 
@@ -71,7 +90,7 @@ INSERT INTO `comprador` (`dni`, `nombre`, `fechaNac`, `password`, `medioDePago`,
 
 CREATE TABLE `detalleticket` (
   `codD` int(11) NOT NULL,
-  `funcion` varchar(30) NOT NULL,
+  `codProyeccion` int(11) NOT NULL,
   `cant` int(11) NOT NULL,
   `subtotal` double NOT NULL,
   `codTicket` int(11) NOT NULL,
@@ -119,27 +138,31 @@ CREATE TABLE `proyeccion` (
   `precioDelLugar` double NOT NULL,
   `nroSala` int(11) NOT NULL,
   `codProyeccion` int(11) NOT NULL,
-  `idPelicula` int(11) NOT NULL
+  `idPelicula` int(11) NOT NULL,
+  `estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `proyeccion`
 --
 
-INSERT INTO `proyeccion` (`idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFin`, `lugaresDisponibles`, `precioDelLugar`, `nroSala`, `codProyeccion`, `idPelicula`) VALUES
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 1, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 2, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 3, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 4, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 5, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 6, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 7, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 8, 3),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 9, 3),
-('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 10, 3),
-('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 11, 3),
-('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 12, 3),
-('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 13, 3);
+INSERT INTO `proyeccion` (`idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFin`, `lugaresDisponibles`, `precioDelLugar`, `nroSala`, `codProyeccion`, `idPelicula`, `estado`) VALUES
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 1, 3, 0),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 2, 3, 0),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 3, 3, 0),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 4, 3, 0),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 5, 3, 1),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 6, 3, 0),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 7, 3, 0),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 8, 3, 0),
+('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 9, 3, 0),
+('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 10, 3, 0),
+('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 11, 3, 0),
+('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 12, 3, 0),
+('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 13, 3, 0),
+('Español', 1, 0, '19:00', '19:00', 25, 2000, 3, 14, 3, 0),
+('Español', 1, 1, '19:30', '19:30', 25, 20000, 3, 15, 3, 0),
+('Ingles', 1, 0, '20:30', '20:30', 25, 123, 3, 16, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -159,9 +182,9 @@ CREATE TABLE `sala` (
 --
 
 INSERT INTO `sala` (`nroSala`, `apta3D`, `capacidad`, `estado`) VALUES
-(1, 1, 120, 1),
-(2, 0, 230, 1),
-(3, 1, 30, 1);
+(1, 1, 15, 1),
+(2, 0, 15, 1),
+(3, 1, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -174,7 +197,8 @@ CREATE TABLE `ticketcompra` (
   `fechaFuncion` text NOT NULL,
   `monto` double NOT NULL,
   `dni` int(11) NOT NULL,
-  `codTicket` int(11) NOT NULL
+  `codTicket` int(11) NOT NULL,
+  `estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -201,7 +225,8 @@ ALTER TABLE `detalleticket`
   ADD PRIMARY KEY (`codD`),
   ADD KEY `codTicket` (`codTicket`,`codAsiento`),
   ADD KEY `codAsiento` (`codAsiento`),
-  ADD KEY `codAsiento2` (`codAsiento2`);
+  ADD KEY `codAsiento2` (`codAsiento2`),
+  ADD KEY `codProyeccion` (`codProyeccion`);
 
 --
 -- Indices de la tabla `pelicula`
@@ -238,7 +263,7 @@ ALTER TABLE `ticketcompra`
 -- AUTO_INCREMENT de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `detalleticket`
@@ -256,7 +281,7 @@ ALTER TABLE `pelicula`
 -- AUTO_INCREMENT de la tabla `proyeccion`
 --
 ALTER TABLE `proyeccion`
-  MODIFY `codProyeccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `codProyeccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `sala`

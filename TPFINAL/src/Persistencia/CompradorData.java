@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- * @author Grupo 11
- */
-
 public class CompradorData {
 
     private Connection con = null;
@@ -76,25 +72,25 @@ public class CompradorData {
         return comprador;
     }
 
-    public Boolean buscarCompradorInicioSesion(int id, String contra){
+    public Boolean buscarCompradorInicioSesion(int id, String contra) {
         String sql = "SELECT dni, password FROM comprador WHERE dni = ? AND password = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
             ps.setString(2, contra);
-            
+
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.err.println("Error al buscar comprador: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Comprador");
         }
         return false;
     }
-    
+
     public void habilitarComprador(int id) {
         String sql = "UPDATE comprador SET estado= 1 WHERE dni = ?";
 
@@ -137,7 +133,7 @@ public class CompradorData {
             ps.setBoolean(1, estado);
             ps.setString(2, nombre);
             ps.setInt(3, dni);
-            
+
             int n = ps.executeUpdate();
             if (n > 0) {
                 JOptionPane.showMessageDialog(null, "Comprador modificado con éxito.");
@@ -173,4 +169,45 @@ public class CompradorData {
 
         return compradores;
     }
-}
+
+    public void modificarContrasena(int dni, String contra) {
+        String sql = "UPDATE comprador SET password = ? WHERE dni = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, contra);
+            ps.setInt(2, dni);
+
+            int n = ps.executeUpdate();
+            if (n > 0) {
+                JOptionPane.showMessageDialog(null, "Contraseña modificada con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró comprador a modificar.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al modificar comprador: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comprador. ModificarContrasena");
+        }
+    }
+
+    public String buscarContrasena(int dni) {
+        String sql = "SELECT password FROM comprador WHERE dni = ? ";
+
+        String contra = "";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, dni);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    contra = rs.getString("password");
+                }
+                return contra;
+            }
+            } catch (SQLException e) {
+                System.err.println("Error al modificar comprador: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Error al acceder a la tabla comprador. BuscarContrasena");
+            }
+            return "";
+        }
+    }

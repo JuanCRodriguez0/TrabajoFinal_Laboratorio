@@ -59,14 +59,14 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Fecha Nacimiento:");
 
-        contra2.setText("jPasswo");
+        contra2.setText("*******");
         contra2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 contra2MouseClicked(evt);
             }
         });
 
-        contra1.setText("jPasswo");
+        contra1.setText("*******");
         contra1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 contra1MouseClicked(evt);

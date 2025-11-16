@@ -2,12 +2,15 @@ package Persistencia;
 
 import Modelo.Asiento;
 import Modelo.Conexion;
+import Modelo.Proyeccion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,30 +26,24 @@ public class AsientoData {
 
     public void crearAsiento(Asiento asiento) {
 
-        String sql = "INSERT INTO asiento  (fila, numero, estado, codProyeccion) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO asiento (fila, numero, estado, codProyeccion) VALUES (?,?,?,?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, String.valueOf(asiento.getFila()));
             ps.setInt(2, asiento.getNumero());
             ps.setBoolean(3, asiento.isEstado());
-            ps.setInt(4, asiento.getFuncion().getCodProyeccion());
+            ps.setInt(4, asiento.getCodProyeccion());
 
             ps.executeUpdate();
-
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    asiento.setCodAsiento(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Comprador creado con éxito (ID " + asiento.getCodAsiento() + ").");
-                }
-            }
-
+            
         } catch (SQLException e) {
             System.err.println("Error al crear asiento: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Asiento.");
         }
     }
-
+    
+    
     public void habilitarAsiento(int id) {
         String sql = "UPDATE asiento SET estado= 1 WHERE codAsiento = ?";
 
@@ -90,7 +87,7 @@ public class AsientoData {
             ps.setString(1, String.valueOf(asiento.getFila()));
             ps.setInt(2, asiento.getNumero());
             ps.setBoolean(3, asiento.isEstado());
-            ps.setInt(4, asiento.getFuncion().getCodProyeccion());
+            ps.setInt(4, asiento.getCodProyeccion());
             ps.setInt(5, asiento.getCodAsiento());
 
             int n = ps.executeUpdate();
@@ -102,7 +99,32 @@ public class AsientoData {
             System.err.println("Error al modificar asiento: " + ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Asiento.");
         }
+    }
 
+    public List<Asiento> asientosOcupados(int codProy) {
+        String sql = "SELECT fila, numero, asiento.codProyeccion FROM asiento JOIN proyeccion ON proyeccion.codProyeccion = asiento.codProyeccion AND proyeccion.codProyeccion = ? AND asiento.estado = 0";
+
+        List<Asiento> asienOcup = new ArrayList<>();
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, codProy);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Asiento asiento = new Asiento();
+                    String filita = rs.getString("fila");
+                    asiento.setFila(filita.charAt(0));
+                    asiento.setNumero(rs.getInt("numero"));
+                    asiento.setEstado(false);
+                    asiento.setCodProyeccion(rs.getInt("codProyeccion"));
+                    asienOcup.add(asiento);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar Proyecciones: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar proyecciones: " + e.getMessage());
+        }
+        return asienOcup;
     }
 
 }

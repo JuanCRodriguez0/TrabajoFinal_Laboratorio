@@ -11,11 +11,13 @@ public class Proyeccion {
     private String horaFin;
     private int lugaresDisponibles;
     private double precioDelLugar;
+    private Boolean estado;
+    private String titulo;
 
     public Proyeccion() {
     }
 
-    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, String horaInicio, String horaFin, double precioDelLugar, int peliId, int salaId) {
+    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, String horaInicio, String horaFin, double precioDelLugar, int peliId, int salaId, Boolean estado) {
         this.idioma = idioma;
         this.es3D = es3D;
         this.subtitulada = subtitulada;
@@ -25,8 +27,17 @@ public class Proyeccion {
         this.precioDelLugar = precioDelLugar;
         this.peliId = peliId;
         this.salaId = salaId;
+        this.estado = estado;
     }
 
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+    
     public int getPeliId() {
         return peliId;
     }
@@ -108,14 +119,19 @@ public class Proyeccion {
         this.precioDelLugar = precioDelLugar;
     }
 
-    @Override
-    public String toString() {
-        return "Proyeccion{" + "codProyeccion=" + codProyeccion + ", pelicula=" +  peliId + ", sala=" + salaId + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + '}';
+    public String getTitulo() {
+        return titulo;
     }
 
-   
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-    
+    @Override
+    public String toString() {
+        return "Proyeccion{" + "codProyeccion=" + codProyeccion + ", peliId=" + peliId + ", salaId=" + salaId + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + ", estado=" + estado + '}';
+    }
+
     
     
 }

@@ -44,7 +44,7 @@ public class TPFINAL {
         
         
        Sala modificarSala1 = new Sala(true, 120, true); 
-       SD.modificarSala(modificarSala1); 
+       //SD.modificarSala(modificarSala1); 
       
     }
     

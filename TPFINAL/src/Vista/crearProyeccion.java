@@ -65,17 +65,17 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Idioma", "3D", "Subtitulos", "Hora Inicio", "Hora Fin", "Butacas disp", "Precio"
+                "Idioma", "3D", "Subtitulos", "Hora Inicio", "Hora Fin", "Butacas disp", "Precio", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -91,6 +91,7 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
         }
 
         jLabel2.setText("Subtitulos");
@@ -176,9 +177,7 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
                                 .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                     .addGap(38, 38, 38)
                                     .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jDesktopPane1Layout.createSequentialGroup()
                                             .addGap(1, 1, 1)
                                             .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,7 +362,7 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
             int salaID = Integer.parseInt(soloNumero2);
 
             //int idPelicula, String titulo, String director, String actores, String origen, String genero, Date estreno, boolean enCartelera, int idSala
-            Proyeccion p = new Proyeccion(idiomaST, tresDeST, subtitulosST, horaInicioST, horaFinST, precio, peliId, salaID);
+            Proyeccion p = new Proyeccion(idiomaST, tresDeST, subtitulosST, horaInicioST, horaFinST, precio, peliId, salaID, true);
             ProyeccionData pd = null;
             try {
                 pd = new ProyeccionData();
@@ -395,7 +394,7 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public void tablaProyecciones() throws SQLException {
-        List<Proyeccion> proy = new ProyeccionData().listarProyecciones();
+        List<Proyeccion> proy = new ProyeccionData().listarCartelera();
 
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Idioma");
@@ -407,12 +406,15 @@ public class crearProyeccion extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio");
 
         for (Proyeccion p : proy) {
-            modelo.addRow(new Object[]{
-                p.getIdioma(), p.isEs3D(), p.isSubtitulada(), p.getHoraInicio(), p.getHoraFin(), p.getLugaresDisponibles(), p.getPrecioDelLugar()
-            });
+            if (p.getEstado()) {
+                modelo.addRow(new Object[]{
+                    p.getIdioma(), p.isEs3D(), p.isSubtitulada(), p.getHoraInicio(), p.getHoraFin(), p.getLugaresDisponibles(), p.getPrecioDelLugar()
+                });
+            }
         }
 
         jTable1.setModel(modelo);
+
     }
 
     public void rellenarComboBoxPeliculas() throws SQLException {

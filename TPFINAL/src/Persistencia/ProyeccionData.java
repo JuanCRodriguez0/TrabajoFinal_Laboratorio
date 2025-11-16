@@ -1,22 +1,15 @@
 package Persistencia;
 
 import Modelo.Conexion;
-import Modelo.Pelicula;
 import Modelo.Proyeccion;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Grupo 11
@@ -31,7 +24,7 @@ public class ProyeccionData {
 
     public void crearFuncion(Proyeccion funcion) {
 
-        String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, nroSala, idPelicula) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, nroSala, idPelicula,estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -44,6 +37,7 @@ public class ProyeccionData {
             ps.setDouble(7, funcion.getPrecioDelLugar());
             ps.setInt(8, funcion.getSalaId());
             ps.setInt(9, funcion.getPeliId());
+            ps.setBoolean(10,true);
 
             ps.executeUpdate();
 
@@ -61,8 +55,8 @@ public class ProyeccionData {
         }
     }
 
-    public void eliminarFuncion(int id) {
-        String sql = "DELETE FROM proyeccion WHERE codProyeccion = ?";
+    public void deshabilitarFuncion(int id) {
+        String sql = "UPDATE proyeccion SET estado = 0 WHERE codProyeccion = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -70,7 +64,7 @@ public class ProyeccionData {
             int eU = ps.executeUpdate();
 
             if (eU > 0) {
-                JOptionPane.showMessageDialog(null, "Función eliminada con éxito.");
+                JOptionPane.showMessageDialog(null, "Función deshabilitada con éxito.");
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró función para eliminar.");
             }
@@ -81,19 +75,16 @@ public class ProyeccionData {
         }
     }
 
-    public void modificarFuncion(Proyeccion funcion) {
+    public void modificarFuncion(String idioma, Boolean es3D, Boolean subtitulada, Double precio, int codProyeccion) {
         String sql = "UPDATE proyeccion SET idioma = ?, es3D = ?, subtitulada = ?, precioDelLugar = ? WHERE codProyeccion = ? ";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, funcion.getIdioma());
-            ps.setBoolean(2, funcion.isEs3D());
-            ps.setBoolean(3, funcion.isSubtitulada());
-            /*ps.setDate(4, java.sql.Date.valueOf(funcion.getHoraInicio()));
-            ps.setDate(4, java.sql.Date.valueOf(funcion.getHoraFin()));
-            ps.setInt(4, funcion.getLugaresDisponibles());*/
-            ps.setDouble(4, funcion.getPrecioDelLugar());
-            ps.setInt(5, funcion.getCodProyeccion());
+            ps.setString(1, idioma);
+            ps.setBoolean(2, es3D);
+            ps.setBoolean(3, subtitulada);
+            ps.setDouble(4, precio);
+            ps.setInt(5, codProyeccion);
 
             int eU = ps.executeUpdate();
 
@@ -112,7 +103,7 @@ public class ProyeccionData {
     public List<Proyeccion> listarProyecciones() {
         List<Proyeccion> proys = new ArrayList<>();
 
-        String sql = "SELECT idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar FROM proyeccion";
+        String sql = "SELECT idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, codProyeccion, estado FROM proyeccion";
 
         try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -124,6 +115,8 @@ public class ProyeccionData {
                 proy.setHoraFin(rs.getString("horaFin"));
                 proy.setLugaresDisponibles(rs.getInt("lugaresDisponibles"));
                 proy.setPrecioDelLugar(rs.getDouble("precioDelLugar"));
+                proy.setCodProyeccion(rs.getInt("codProyeccion"));
+                proy.setEstado(rs.getBoolean("estado"));
                 proys.add(proy);
             }
         } catch (SQLException e) {
@@ -131,5 +124,39 @@ public class ProyeccionData {
             JOptionPane.showMessageDialog(null, "Error al listar proyecciones: " + e.getMessage());
         }
         return proys;
+    }
+    
+    public List<Proyeccion> listarCartelera(){
+        List<Proyeccion> cartelera = new ArrayList<>();
+        
+        String sql = "SELECT es3D, horaFin, horaInicio, subtitulada, estado, titulo, codProyeccion, idioma, lugaresDisponibles, precioDelLugar FROM proyeccion JOIN pelicula ON proyeccion.idPelicula = pelicula.idPelicula AND estado = 1";
+        
+        try(PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Proyeccion proye = new Proyeccion();
+                proye.setEs3D(rs.getBoolean("es3D"));
+                proye.setSubtitulada(rs.getBoolean("subtitulada"));
+                proye.setHoraInicio(rs.getString("horaInicio"));
+                proye.setHoraFin(rs.getString("horaFin"));
+                proye.setLugaresDisponibles(rs.getInt("lugaresDisponibles"));
+                proye.setPrecioDelLugar(rs.getDouble("precioDelLugar"));
+                proye.setCodProyeccion(rs.getInt("codProyeccion"));
+                proye.setEstado(rs.getBoolean("estado"));
+                proye.setTitulo(rs.getString("titulo"));
+                proye.setIdioma(rs.getString("idioma"));
+                cartelera.add(proye);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar Proyecciones: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar proyecciones: " + e.getMessage());
+        }
+        return cartelera;
+    }
+    
+    // ACÁ HAY QUE TERMINARLO, BUSCAR LOS DISPONIBLES
+    public void modificarLugaresDisponibles(){
+        String sql = "SELECT (lugaresDisponibles - ? ) lugaresDispActualizado FROM `proyeccion`";
+        
+        
     }
 }

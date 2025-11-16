@@ -5,17 +5,16 @@ public class Asiento {
     private char fila;
     private int numero; 
     private boolean estado;
-    private Proyeccion funcion;
+    private int codProyeccion;
 
     public Asiento() {
     }
 
-    public Asiento(int codAsiento, char fila, int numero, boolean estado, Proyeccion funcion) {
+    public Asiento(int codAsiento, char fila, int numero, boolean estado) {
         this.codAsiento = codAsiento;
         this.fila = fila;
         this.numero = numero;
         this.estado = estado;
-        this.funcion = funcion;
     }
 
     public int getCodAsiento() {
@@ -50,18 +49,20 @@ public class Asiento {
         this.estado = estado;
     }
 
-    public Proyeccion getFuncion() {
-        return funcion;
+    public int getCodProyeccion() {
+        return codProyeccion;
     }
 
-    public void setFuncion(Proyeccion funcion) {
-        this.funcion = funcion;
+    public void setCodProyeccion(int codProyeccion) {
+        this.codProyeccion = codProyeccion;
     }
 
-    @Override
-    public String toString() {
-        return "Asiento{" + "codAsiento=" + codAsiento + ", fila=" + fila + ", numero=" + numero + ", estado=" + estado + ", funcion=" + funcion + '}';
+    public Asiento(int codAsiento, char fila, int numero, boolean estado, int codProyeccion) {
+        this.codAsiento = codAsiento;
+        this.fila = fila;
+        this.numero = numero;
+        this.estado = estado;
+        this.codProyeccion = codProyeccion;
     }
-    
     
 }
