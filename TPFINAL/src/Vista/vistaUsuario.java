@@ -120,11 +120,15 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonVerTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerTicketsActionPerformed
-        jDesktopPane1.repaint();
-        verTickets aux = new verTickets();
-        aux.setVisible(true);
-        jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux);
+        try {
+            jDesktopPane1.repaint();
+            verTickets aux = new verTickets();
+            aux.setVisible(true);
+            jDesktopPane1.add(aux);
+            jDesktopPane1.moveToFront(aux);
+        } catch (Exception e) {
+            System.out.println("ERROR " + e.getMessage());
+        }
     }//GEN-LAST:event_botonVerTicketsActionPerformed
 
     private void botonModificarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarContraseñaActionPerformed

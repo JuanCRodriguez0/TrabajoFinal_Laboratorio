@@ -11,9 +11,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Grupo 11
- */
 public class ProyeccionData {
 
     private Connection con = null;
@@ -37,7 +34,7 @@ public class ProyeccionData {
             ps.setDouble(7, funcion.getPrecioDelLugar());
             ps.setInt(8, funcion.getSalaId());
             ps.setInt(9, funcion.getPeliId());
-            ps.setBoolean(10,true);
+            ps.setBoolean(10, true);
 
             ps.executeUpdate();
 
@@ -125,13 +122,13 @@ public class ProyeccionData {
         }
         return proys;
     }
-    
-    public List<Proyeccion> listarCartelera(){
+
+    public List<Proyeccion> listarCartelera() {
         List<Proyeccion> cartelera = new ArrayList<>();
-        
+
         String sql = "SELECT es3D, horaFin, horaInicio, subtitulada, estado, titulo, codProyeccion, idioma, lugaresDisponibles, precioDelLugar FROM proyeccion JOIN pelicula ON proyeccion.idPelicula = pelicula.idPelicula AND estado = 1";
-        
-        try(PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Proyeccion proye = new Proyeccion();
                 proye.setEs3D(rs.getBoolean("es3D"));
@@ -152,11 +149,24 @@ public class ProyeccionData {
         }
         return cartelera;
     }
-    
-    // ACÁ HAY QUE TERMINARLO, BUSCAR LOS DISPONIBLES
-    public void modificarLugaresDisponibles(){
-        String sql = "SELECT (lugaresDisponibles - ? ) lugaresDispActualizado FROM `proyeccion`";
-        
-        
+
+    public List<Proyeccion> modificarLugaresDisponibles() {
+        List<Proyeccion> lugaresOcupados = new ArrayList();
+        String sql = "SELECT COUNT(asiento.codAsiento) lugaresDisp, proyeccion.codProyeccion FROM proyeccion JOIN asiento ON proyeccion.codProyeccion = asiento.codProyeccion GROUP BY proyeccion.codProyeccion";
+
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Proyeccion p = new Proyeccion();
+                p.setCodProyeccion(rs.getInt("proyeccion.codProyeccion"));
+                p.setLugaresDisponibles(rs.getInt("lugaresDisp"));
+                lugaresOcupados.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al listar Proyecciones: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar proyecciones: " + e.getMessage());
+        }
+
+        return lugaresOcupados;
     }
 }

@@ -2,16 +2,17 @@ package Vista;
 
 import Modelo.Asiento;
 import Modelo.Proyeccion;
+import Modelo.Ticket;
 import Persistencia.AsientoData;
 import Persistencia.ProyeccionData;
+import Persistencia.TicketData;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 public class vistaCartelera extends javax.swing.JInternalFrame {
@@ -20,6 +21,8 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
         initComponents();
         tablaCartelera();
         despintarAsientos();
+        descontarLugaresOcupados();
+        JOptionPane.showMessageDialog(null, "Seleccione una pelicula en la tabla para ver los lugares disponibles.");
     }
 
     @SuppressWarnings("unchecked")
@@ -363,7 +366,8 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
             comboB1, comboB2, comboB3, comboB4, comboB5,
             comboC1, comboC2, comboC3, comboC4, comboC5};
         List<Integer> chSel = new ArrayList<>();
-
+        Asiento asientito = null;
+        Asiento[] asientote = null;
         if (fila != -1) {
 
             for (int i = 0; i < checks.length; i++) {
@@ -372,8 +376,107 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                 }
             }
 
-            if (!(chSel.size() > 2)) {
+            if (!(chSel.size() == 2)) {
+                asientote = new Asiento[2];
+                AsientoData ad = null;
+                try {
+                    ad = new AsientoData();
+                } catch (Exception e) {
+                    System.out.println("ERROR " + e.getMessage());
+                }
 
+                for (int t = 0; t < chSel.size(); t++) {
+                    asientote[t] = new Asiento();
+                    
+                    asientote[t].setCodProyeccion((int) jTable1.getValueAt(fila, 6));
+                    asientote[t].setEstado(false);
+
+                    switch (chSel.get(t)) {
+                        case 0:
+                            asientote[t].setFila('A');
+                            asientote[t].setNumero(1);
+                            break;
+                        case 1:
+                            asientote[t].setFila('A');
+                            asientote[t].setNumero(2);
+                            break;
+                        case 2:
+                            asientote[t].setFila('A');
+                            asientote[t].setNumero(3);
+
+                            break;
+                        case 3:
+                            asientote[t].setFila('A');
+                            asientote[t].setNumero(4);
+                            break;
+                        case 4:
+                            asientote[t].setFila('A');
+                            asientote[t].setNumero(5);
+                            break;
+
+                        case 5:
+                            asientote[t].setFila('B');
+                            asientote[t].setNumero(1);
+                            break;
+                        case 6:
+                            asientote[t].setFila('B');
+                            asientote[t].setNumero(2);
+                            break;
+                        case 7:
+                            asientote[t].setFila('B');
+                            asientote[t].setNumero(3);
+                            break;
+                        case 8:
+                            asientote[t].setFila('B');
+                            asientote[t].setNumero(4);
+                            break;
+                        case 9:
+                            asientote[t].setFila('B');
+                            asientote[t].setNumero(5);
+                            break;
+
+                        case 10:
+                            asientote[t].setFila('C');
+                            asientote[t].setNumero(1);
+                            break;
+                        case 11:
+                            asientote[t].setFila('C');
+                            asientote[t].setNumero(2);
+                            break;
+                        case 12:
+                            asientote[t].setFila('C');
+                            asientote[t].setNumero(3);
+                            break;
+                        case 13:
+                            asientote[t].setFila('C');
+                            asientote[t].setNumero(4);
+                            break;
+                        case 14:
+                            asientote[t].setFila('C');
+                            asientote[t].setNumero(5);
+                            break;
+                    }
+                    ad.crearAsiento(asientote[t]);
+                    TicketData td = null;
+                    try {
+                        td = new TicketData();
+                    } catch (Exception e) {
+                        System.out.println("ERROR " + e.getMessage());
+                    }
+                    Ticket[] tick = new Ticket[2];
+                    tick[t] = new Ticket();
+                    tick[t].setCodProyeccion((int)jTable1.getValueAt(fila, 6));
+                    tick[t].setMonto((double)jTable1.getValueAt(fila, 5));
+                    tick[t].setEstado(true);
+                    java.sql.Date fechaSQL = java.sql.Date.valueOf(LocalDate.now());
+                    tick[t].setFechaCompra(fechaSQL);
+                    tick[t].setDniComprador(vistaLogin.user);
+                    td.crearTicket(tick[t]);
+                }
+                JOptionPane.showMessageDialog(null, "Tickets comprados con éxito.\n\n¡Disfruten la pelicula!");
+                this.dispose();
+                
+            } else if (!(chSel.size() == 1)) {
                 AsientoData ad = null;
                 try {
                     ad = new AsientoData();
@@ -383,7 +486,7 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
 
                 for (int t = 0; t < chSel.size(); t++) {
 
-                    Asiento asientito = new Asiento();
+                    asientito = new Asiento();
                     asientito.setCodProyeccion((int) jTable1.getValueAt(fila, 6));
                     asientito.setEstado(false);
 
@@ -399,7 +502,7 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                         case 2:
                             asientito.setFila('A');
                             asientito.setNumero(3);
-                            
+
                             break;
                         case 3:
                             asientito.setFila('A');
@@ -453,13 +556,29 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                             break;
                     }
                     ad.crearAsiento(asientito);
+                    TicketData td = null;
+                    try {
+                        td = new TicketData();
+                    } catch (Exception e) {
+                        System.out.println("ERROR " + e.getMessage());
+                    }
+                    Ticket tic = new Ticket();
+                    tic.setCodProyeccion((int)jTable1.getValueAt(fila, 6));
+                    tic.setMonto((double)jTable1.getValueAt(fila, 5));
+                    tic.setEstado(true);
+                    java.sql.Date fechaSQL = java.sql.Date.valueOf(LocalDate.now());
+                    tic.setFechaCompra(fechaSQL);
+                    tic.setDniComprador(vistaLogin.user);
+                    td.crearTicket(tic);
                 }
-                JOptionPane.showMessageDialog(null, "Comprado con éxito.\n\n¡Disfrute la pelicula!");
+                JOptionPane.showMessageDialog(null, "TIcket comprado con éxito.\n\n¡Disfrute la pelicula!");
                 this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "No puede seleccionar más de dos asientos.");
+            }else {
+                JOptionPane.showMessageDialog(null, "Mínimo UN asiento, máximo DOS asientos.");
             }
-        }
+            }
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -615,6 +734,7 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
             int minutoFin = Integer.parseInt(p.getHoraFin().split(":")[1]);
 
             int minutosDuracion = ((horaFin * 60) + minutoFin) - ((horaInicio * 60) + minutoInicio);
+
             if (p.getEstado()) {
                 modelo.addRow(new Object[]{
                     p.getTitulo(), p.isEs3D(), p.isSubtitulada(), minutosDuracion, p.getLugaresDisponibles(), p.getPrecioDelLugar(), p.getCodProyeccion()
@@ -666,6 +786,26 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
         comboC3.setVisible(false);
         comboC4.setVisible(false);
         comboC5.setVisible(false);
+    }
+
+    public void descontarLugaresOcupados() {
+        ProyeccionData pd = null;
+        try {
+            pd = new ProyeccionData();
+        } catch (Exception e) {
+            System.out.println("ERROR " + e.getMessage());
+        }
+        List<Proyeccion> lo = pd.modificarLugaresDisponibles();
+
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            int codProy = (int) jTable1.getValueAt(i, 6);
+
+            for (Proyeccion p : lo) {
+                if (p.getCodProyeccion() == codProy) {
+                    jTable1.setValueAt(15 - p.getLugaresDisponibles(), i, 4);
+                }
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

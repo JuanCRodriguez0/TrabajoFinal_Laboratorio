@@ -3,16 +3,15 @@ package Persistencia;
 import Modelo.Conexion;
 import Modelo.Ticket;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
-import java.sql.Date;
 
-/**
- * @author Grupo 11
- */
 public class TicketData {
 
     private Connection con = null;
@@ -22,16 +21,17 @@ public class TicketData {
     }
 
     public void crearTicket(Ticket ticket) {
-        String sql = "INSERT INTO ticketcompra(fechaCompra, fechaFuncion, monto, dni, codTicket) VALUES ?,?,?,?,?)";
+        String sql = "INSERT INTO ticketcompra(fechaCompra, codProyeccion, monto, dni, codTicket,estado) VALUES (?,?,?,?,?,?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
     
-        ps.setDate(1, java.sql.Date.valueOf(ticket.getFechaCompra()));
-            ps.setDate(2, java.sql.Date.valueOf(ticket.getFechaFuncion()));
+        ps.setDate(1, ticket.getFechaCompra());
+            ps.setInt(2, ticket.getCodProyeccion());
             ps.setDouble(3, ticket.getMonto());
             ps.setInt(4, ticket.getDniComprador());
             ps.setInt(5, ticket.getCodTicket());
+            ps.setBoolean(6, true);
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -50,7 +50,7 @@ public class TicketData {
 
     public Ticket mostrarTicket(int id) {
 
-        String sql = "SELECT fechaCompra, fechaFuncion, monto, dni FROM ticketcompra WHERE codTicket = ?";
+        String sql = "SELECT fechaCompra, codProyeccion, monto, dni FROM ticketcompra WHERE codTicket = ?";
         Ticket ticket = null;
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -61,8 +61,8 @@ public class TicketData {
                 if (rs.next()) {
                     ticket = new Ticket();
                     ticket.setCodTicket(id);
-                    ticket.setFechaCompra(rs.getDate("fechaCompra").toLocalDate());
-                    ticket.setFechaFuncion(rs.getDate("fechaFuncion").toLocalDate());
+                    ticket.setFechaCompra(rs.getDate("fechaCompra"));
+                    ticket.setCodProyeccion(rs.getInt("codProyeccion"));
                     ticket.setMonto(rs.getDouble("monto"));
                     ticket.setDniComprador(Integer.parseInt("dni"));
 
@@ -80,4 +80,26 @@ public class TicketData {
 
     }
     
+    public List<Ticket> listarCartelera(){
+        List<Ticket> listaTickets = new ArrayList();
+        
+        String sql = "SELECT codTicket, dni, fechaCompra, monto FROM ticketcompra WHERE estado = 1";
+        
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Ticket tick = new Ticket();
+                tick.setCodTicket(rs.getInt("codTicket"));
+                tick.setDniComprador(rs.getInt("dni"));
+                tick.setFechaCompra(rs.getDate("fechaCompra"));
+                tick.setMonto(rs.getDouble("monto"));
+                tick.setEstado(true);
+                listaTickets.add(tick);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar tickets: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar tickets: " + e.getMessage());
+        }
+        
+        return listaTickets;
+    }
 }

@@ -4,7 +4,7 @@ import Persistencia.CompradorData;
 import javax.swing.JOptionPane;
 
 public class vistaLogin extends javax.swing.JInternalFrame {
-
+    public static int user;
     public vistaLogin() {
         initComponents();
     }
@@ -139,7 +139,7 @@ public class vistaLogin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonVolverActionPerformed
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
-        int user = 0;
+        user = 0;
         try {
             user = Integer.parseInt(textUsuario.getText());
         } catch (Exception e) {

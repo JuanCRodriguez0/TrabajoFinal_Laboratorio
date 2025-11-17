@@ -1,11 +1,11 @@
 package Modelo;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Ticket {
 
-    private LocalDate fechaCompra;
-    private LocalDate fechaFuncion;
+    private Date fechaCompra;
+    private int codProyeccion;
     private double monto;
     private int dniComprador;
     private int codTicket;
@@ -14,28 +14,28 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(LocalDate fechaCompra, LocalDate fechaFuncion, double monto, int dniComprador, boolean estado) {
+    public Ticket(Date fechaCompra, int codProyeccion, double monto, int dniComprador, boolean estado) {
         this.fechaCompra = fechaCompra;
-        this.fechaFuncion = fechaFuncion;
+        this.codProyeccion = codProyeccion;
         this.monto = monto;
         this.dniComprador = dniComprador;
         this.estado = estado;
     }
 
-    public LocalDate getFechaCompra() {
+    public Date getFechaCompra() {
         return fechaCompra;
     }
 
-    public void setFechaCompra(LocalDate fechaCompra) {
+    public void setFechaCompra(Date fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
 
-    public LocalDate getFechaFuncion() {
-        return fechaFuncion;
+    public int getCodProyeccion() {
+        return codProyeccion;
     }
 
-    public void setFechaFuncion(LocalDate fechaFuncion) {
-        this.fechaFuncion = fechaFuncion;
+    public void setCodProyeccion(int codProyeccion) {
+        this.codProyeccion = codProyeccion;
     }
 
     public double getMonto() {
@@ -70,10 +70,7 @@ public class Ticket {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "Ticket{" + "fechaCompra=" + fechaCompra + ", fechaFuncion=" + fechaFuncion + ", monto=" + monto + ", dniComprador=" + dniComprador + ", codTicket=" + codTicket + ", estado=" + estado + '}';
-    }
+   
     
     
 

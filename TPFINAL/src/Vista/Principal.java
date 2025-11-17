@@ -134,14 +134,16 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String usuario = JOptionPane.showInputDialog(null, "Ingrese el Usuario:", "Usuario", JOptionPane.INFORMATION_MESSAGE);
         String contra = JOptionPane.showInputDialog(null, "Ingrese la Contraseña:", "Contraseña", JOptionPane.INFORMATION_MESSAGE);
-        if (usuario.equalsIgnoreCase("admin") && contra.equalsIgnoreCase("admin")) {
+        if (usuario == null || contra == null) {
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacíos.\n\nIntente con: \n\bUsuario: admin \nContraseña: admin\b");
+        }else if(usuario.equalsIgnoreCase("admin") && contra.equalsIgnoreCase("admin")){
             jDesktopPane1.repaint();
             vistaAdmin aux = new vistaAdmin();
             aux.setVisible(true);
             jDesktopPane1.add(aux);
             jDesktopPane1.moveToFront(aux);
-        }else{
-            JOptionPane.showMessageDialog(null, "Contraseña o usuario incorrecto.\nIntente con: \nUsuario: admin \nContraseña: admin");
+        }   else{
+            JOptionPane.showMessageDialog(null, "Contraseña o usuario incorrecto.\n\nIntente con: \n\bUsuario: admin \nContraseña: admin\b");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
