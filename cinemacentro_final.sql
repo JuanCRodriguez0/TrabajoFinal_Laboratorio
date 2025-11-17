@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2025 a las 21:08:26
+-- Tiempo de generación: 17-11-2025 a las 15:59:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -54,7 +54,10 @@ INSERT INTO `asiento` (`codAsiento`, `fila`, `numero`, `estado`, `codProyeccion`
 (27, 'C', 3, 0, 5),
 (28, 'C', 4, 0, 5),
 (29, 'A', 3, 0, 5),
-(30, 'A', 4, 0, 5);
+(30, 'A', 4, 0, 5),
+(31, 'C', 2, 0, 5),
+(32, 'B', 2, 0, 16),
+(33, 'C', 2, 0, 16);
 
 -- --------------------------------------------------------
 
@@ -151,7 +154,7 @@ INSERT INTO `proyeccion` (`idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFi
 ('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 2, 3, 0),
 ('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 3, 3, 0),
 ('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 4, 3, 0),
-('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 5, 3, 1),
+('Español', 1, 1, '19:00', '20:00', 15, 1200, 2, 5, 3, 1),
 ('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 6, 3, 0),
 ('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 7, 3, 0),
 ('Español', 1, 1, '19:00', '19:00', 25, 1200, 2, 8, 3, 0),
@@ -162,7 +165,7 @@ INSERT INTO `proyeccion` (`idioma`, `es3D`, `subtitulada`, `horaInicio`, `horaFi
 ('Español', 1, 1, '19:30', '19:30', 25, 1200, 3, 13, 3, 0),
 ('Español', 1, 0, '19:00', '19:00', 25, 2000, 3, 14, 3, 0),
 ('Español', 1, 1, '19:30', '19:30', 25, 20000, 3, 15, 3, 0),
-('Ingles', 1, 0, '20:30', '20:30', 25, 123, 3, 16, 3, 1);
+('Ingles', 1, 0, '20:30', '21:00', 15, 123, 3, 16, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -182,7 +185,7 @@ CREATE TABLE `sala` (
 --
 
 INSERT INTO `sala` (`nroSala`, `apta3D`, `capacidad`, `estado`) VALUES
-(1, 1, 15, 1),
+(1, 0, 15, 1),
 (2, 0, 15, 1),
 (3, 1, 15, 1);
 
@@ -194,12 +197,19 @@ INSERT INTO `sala` (`nroSala`, `apta3D`, `capacidad`, `estado`) VALUES
 
 CREATE TABLE `ticketcompra` (
   `fechaCompra` date NOT NULL,
-  `fechaFuncion` text NOT NULL,
+  `codProyeccion` tinyint(2) NOT NULL,
   `monto` double NOT NULL,
   `dni` int(11) NOT NULL,
   `codTicket` int(11) NOT NULL,
   `estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `ticketcompra`
+--
+
+INSERT INTO `ticketcompra` (`fechaCompra`, `codProyeccion`, `monto`, `dni`, `codTicket`, `estado`) VALUES
+('2025-11-17', 16, 123, 42357107, 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -263,7 +273,7 @@ ALTER TABLE `ticketcompra`
 -- AUTO_INCREMENT de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `detalleticket`
@@ -293,7 +303,7 @@ ALTER TABLE `sala`
 -- AUTO_INCREMENT de la tabla `ticketcompra`
 --
 ALTER TABLE `ticketcompra`
-  MODIFY `codTicket` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
