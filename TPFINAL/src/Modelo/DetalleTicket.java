@@ -4,23 +4,23 @@ import java.util.ArrayList;
 
 public class DetalleTicket {
     private int codD;
-    //private Proyeccion proyeccion;//deberia ser id de proyeccion
     private int idProyeccion;
-    //private ArrayList<Asiento> asiento;
-    private int cant;
-    private double subtotal;
+    private double total;
     private int idTicket;
     private int codAsiento;
     private int codAsiento2;
-    //private Ticket ticket;
+    private Boolean estado;
 
-    public DetalleTicket(int idProyeccion, int cant, double subtotal, int idTicket, int codAsiento, int codAsiento2) {
+    public DetalleTicket() {
+    }
+
+    public DetalleTicket(int idProyeccion,  double total, int idTicket, int codAsiento, int codAsiento2, Boolean estado) {
         this.idProyeccion = idProyeccion;
-        this.cant = cant;
-        this.subtotal = subtotal;
+        this.total = total;
         this.idTicket = idTicket;
         this.codAsiento = codAsiento;
         this.codAsiento2 = codAsiento2;
+        this.estado = estado;
     }
 
     public int getCodD() {
@@ -39,20 +39,12 @@ public class DetalleTicket {
         this.idProyeccion = idProyeccion;
     }
 
-    public int getCant() {
-        return cant;
+    public double getTotal() {
+        return total;
     }
 
-    public void setCant(int cant) {
-        this.cant = cant;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public int getIdTicket() {
@@ -78,12 +70,18 @@ public class DetalleTicket {
     public void setCodAsiento2(int codAsiento2) {
         this.codAsiento2 = codAsiento2;
     }
+    
+    public Boolean getEstado(){
+        return estado;
+    }
+    
+    public void setEstado(Boolean estado){
+        this.estado = estado;
+    }
 
     @Override
     public String toString() {
-        return "DetalleTicket{" + "codD=" + codD + ", idProyeccion=" + idProyeccion + ", cant=" + cant + ", subtotal=" + subtotal + ", idTicket=" + idTicket + ", codAsiento=" + codAsiento + ", codAsiento2=" + codAsiento2 + '}';
+        return "DetalleTicket{" + "codD=" + codD + ", idProyeccion=" + idProyeccion + ", total=" + total + ", idTicket=" + idTicket + ", codAsiento=" + codAsiento + ", codAsiento2=" + codAsiento2 + '}';
     }
-    
-    
 
 }

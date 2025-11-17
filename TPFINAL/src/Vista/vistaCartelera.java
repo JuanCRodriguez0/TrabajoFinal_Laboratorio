@@ -1,9 +1,11 @@
 package Vista;
 
 import Modelo.Asiento;
+import Modelo.DetalleTicket;
 import Modelo.Proyeccion;
 import Modelo.Ticket;
 import Persistencia.AsientoData;
+import Persistencia.DetalleTicketData;
 import Persistencia.ProyeccionData;
 import Persistencia.TicketData;
 import java.util.List;
@@ -376,9 +378,11 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                 }
             }
 
-            if (!(chSel.size() == 2)) {
+            if (chSel.size() == 1) {
                 asientote = new Asiento[2];
                 AsientoData ad = null;
+                DetalleTicket dT = new DetalleTicket();
+
                 try {
                     ad = new AsientoData();
                 } catch (Exception e) {
@@ -387,7 +391,7 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
 
                 for (int t = 0; t < chSel.size(); t++) {
                     asientote[t] = new Asiento();
-                    
+
                     asientote[t].setCodProyeccion((int) jTable1.getValueAt(fila, 6));
                     asientote[t].setEstado(false);
 
@@ -456,28 +460,48 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                             asientote[t].setNumero(5);
                             break;
                     }
-                    ad.crearAsiento(asientote[t]);
+                    int idAsientote = ad.crearAsiento(asientote[t]);
                     TicketData td = null;
                     try {
                         td = new TicketData();
                     } catch (Exception e) {
                         System.out.println("ERROR " + e.getMessage());
                     }
+
                     Ticket[] tick = new Ticket[2];
                     tick[t] = new Ticket();
-                    tick[t].setCodProyeccion((int)jTable1.getValueAt(fila, 6));
-                    tick[t].setMonto((double)jTable1.getValueAt(fila, 5));
+                    tick[t].setCodProyeccion((int) jTable1.getValueAt(fila, 6));
+                    tick[t].setMonto((double) jTable1.getValueAt(fila, 5));
                     tick[t].setEstado(true);
                     java.sql.Date fechaSQL = java.sql.Date.valueOf(LocalDate.now());
                     tick[t].setFechaCompra(fechaSQL);
                     tick[t].setDniComprador(vistaLogin.user);
-                    td.crearTicket(tick[t]);
+                    int idTic = td.crearTicket(tick[t]);
+                    
+                    
+                    dT.setIdProyeccion((int) jTable1.getValueAt(fila, 6));
+                    dT.setTotal((double) jTable1.getValueAt(fila, 5));
+                    dT.setEstado(true);
+                    dT.setCodAsiento(idAsientote);
+                    dT.setCodAsiento2(-1); //-1 indica que está vacío
+                    dT.setIdTicket(idTic);
+                    
+                    DetalleTicketData dtd = null;
+                    try {
+                        dtd = new DetalleTicketData();
+                    } catch (Exception e) {
+                        System.out.println("ERROR " + e.getMessage());
+                    }
+                    
+                    dtd.crearDetalleTicketP1(dT);
+                    
                 }
-                JOptionPane.showMessageDialog(null, "Tickets comprados con éxito.\n\n¡Disfruten la pelicula!");
+                JOptionPane.showMessageDialog(null, "Ticket comprado con éxito.\n\n¡Disfrute la pelicula!");
                 this.dispose();
-                
-            } else if (!(chSel.size() == 1)) {
+
+            } else if (chSel.size() == 2) {
                 AsientoData ad = null;
+                DetalleTicket dT = new DetalleTicket();
                 try {
                     ad = new AsientoData();
                 } catch (Exception e) {
@@ -555,28 +579,51 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                             asientito.setNumero(5);
                             break;
                     }
-                    ad.crearAsiento(asientito);
+                    int idAsientito = ad.crearAsiento(asientito);
                     TicketData td = null;
                     try {
                         td = new TicketData();
                     } catch (Exception e) {
                         System.out.println("ERROR " + e.getMessage());
                     }
+
                     Ticket tic = new Ticket();
-                    tic.setCodProyeccion((int)jTable1.getValueAt(fila, 6));
-                    tic.setMonto((double)jTable1.getValueAt(fila, 5));
+                    tic.setCodProyeccion((int) jTable1.getValueAt(fila, 6));
+                    tic.setMonto((double) jTable1.getValueAt(fila, 5));
                     tic.setEstado(true);
                     java.sql.Date fechaSQL = java.sql.Date.valueOf(LocalDate.now());
                     tic.setFechaCompra(fechaSQL);
                     tic.setDniComprador(vistaLogin.user);
-                    td.crearTicket(tic);
+                    int idTicki = td.crearTicket(tic);
+                    
+                    if (t == 0) {
+                        dT.setCodAsiento(idAsientito);
+                    } else if (t == 1) {
+                        dT.setIdProyeccion((int) jTable1.getValueAt(fila, 6));
+                        dT.setTotal((double) jTable1.getValueAt(fila, 5) * 2);
+                        dT.setIdTicket(idTicki);
+                        dT.setEstado(true);
+                        dT.setCodAsiento2(idAsientito);
+
+                        DetalleTicketData dtd = null;
+                        try {
+                            dtd = new DetalleTicketData();
+                        } catch (Exception e) {
+                            System.out.println("ERROR " + e.getMessage());
+                        }
+
+                        dtd.crearDetalleTicket(dT);
+                    }
+                    
+
                 }
-                JOptionPane.showMessageDialog(null, "TIcket comprado con éxito.\n\n¡Disfrute la pelicula!");
+                JOptionPane.showMessageDialog(null, "Tickets comprados con éxito.\n\n¡Disfruten la pelicula!");
                 this.dispose();
-            }else {
+                
+            } else{
                 JOptionPane.showMessageDialog(null, "Mínimo UN asiento, máximo DOS asientos.");
             }
-            }
+        }
 
 
     }//GEN-LAST:event_jButton5ActionPerformed

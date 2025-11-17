@@ -24,7 +24,7 @@ public class AsientoData {
         con = Conexion.getConexion();
     }
 
-    public void crearAsiento(Asiento asiento) {
+    public int crearAsiento(Asiento asiento) {
 
         String sql = "INSERT INTO asiento (fila, numero, estado, codProyeccion) VALUES (?,?,?,?)";
 
@@ -37,10 +37,19 @@ public class AsientoData {
 
             ps.executeUpdate();
             
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    asiento.setCodAsiento(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Ticket creado con éxito (ID " + asiento.getCodAsiento() + ").");
+                    return asiento.getCodAsiento();
+                }
+            }
+            
         } catch (SQLException e) {
             System.err.println("Error al crear asiento: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Asiento.");
         }
+        return -1;
     }
     
     

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2025 a las 15:59:10
+-- Tiempo de generación: 17-11-2025 a las 21:17:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,22 +42,24 @@ CREATE TABLE `asiento` (
 --
 
 INSERT INTO `asiento` (`codAsiento`, `fila`, `numero`, `estado`, `codProyeccion`) VALUES
-(18, 'A', 2, 0, 5),
-(19, 'A', 1, 0, 5),
-(20, 'A', 2, 0, 16),
-(21, 'A', 3, 0, 16),
-(22, 'B', 3, 0, 16),
-(23, 'B', 4, 0, 16),
-(24, 'A', 4, 0, 16),
-(25, 'A', 5, 0, 16),
-(26, 'B', 3, 0, 5),
-(27, 'C', 3, 0, 5),
-(28, 'C', 4, 0, 5),
-(29, 'A', 3, 0, 5),
-(30, 'A', 4, 0, 5),
-(31, 'C', 2, 0, 5),
-(32, 'B', 2, 0, 16),
-(33, 'C', 2, 0, 16);
+(41, 'A', 3, 0, 16),
+(42, 'A', 4, 0, 16),
+(43, 'A', 5, 0, 16),
+(44, 'A', 1, 0, 5),
+(45, 'C', 2, 0, 16),
+(46, 'A', 3, 0, 5),
+(47, 'A', 4, 0, 5),
+(48, 'A', 2, 0, 5),
+(49, 'A', 5, 0, 5),
+(50, 'B', 3, 0, 16),
+(51, 'C', 3, 0, 16),
+(52, 'C', 4, 0, 16),
+(53, 'B', 3, 0, 5),
+(54, 'B', 4, 0, 16),
+(55, 'B', 5, 0, 16),
+(56, 'B', 2, 0, 16),
+(57, 'C', 5, 0, 16),
+(58, 'A', 2, 0, 16);
 
 -- --------------------------------------------------------
 
@@ -94,12 +96,20 @@ INSERT INTO `comprador` (`dni`, `nombre`, `fechaNac`, `password`, `medioDePago`,
 CREATE TABLE `detalleticket` (
   `codD` int(11) NOT NULL,
   `codProyeccion` int(11) NOT NULL,
-  `cant` int(11) NOT NULL,
-  `subtotal` double NOT NULL,
+  `total` double NOT NULL,
   `codTicket` int(11) NOT NULL,
   `codAsiento` int(11) NOT NULL,
-  `codAsiento2` int(11) NOT NULL
+  `codAsiento2` int(11) DEFAULT NULL,
+  `estado` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `detalleticket`
+--
+
+INSERT INTO `detalleticket` (`codD`, `codProyeccion`, `total`, `codTicket`, `codAsiento`, `codAsiento2`, `estado`) VALUES
+(1, 16, 246, 16, 51, 52, 1),
+(9, 16, 123, 16, 58, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -209,7 +219,24 @@ CREATE TABLE `ticketcompra` (
 --
 
 INSERT INTO `ticketcompra` (`fechaCompra`, `codProyeccion`, `monto`, `dni`, `codTicket`, `estado`) VALUES
-('2025-11-17', 16, 123, 42357107, 1, 1);
+('2025-11-17', 16, 123, 42357107, 9, 1),
+('2025-11-17', 16, 123, 42357107, 10, 1),
+('2025-11-17', 16, 123, 42357107, 11, 1),
+('2025-11-17', 5, 1200, 42357107, 12, 1),
+('2025-11-17', 16, 123, 42357107, 13, 1),
+('2025-11-17', 5, 1200, 42357107, 14, 1),
+('2025-11-17', 5, 1200, 42357107, 15, 1),
+('2025-11-17', 5, 1200, 42357107, 16, 1),
+('2025-11-17', 5, 1200, 42357107, 17, 1),
+('2025-11-17', 16, 123, 42357107, 18, 1),
+('2025-11-17', 16, 123, 42357107, 19, 1),
+('2025-11-17', 16, 123, 42357107, 20, 1),
+('2025-11-17', 5, 1200, 42357107, 21, 1),
+('2025-11-17', 16, 123, 42357107, 22, 1),
+('2025-11-17', 16, 123, 42357107, 23, 1),
+('2025-11-17', 16, 123, 42357107, 24, 1),
+('2025-11-17', 16, 123, 42357107, 25, 1),
+('2025-11-17', 16, 123, 42357107, 26, 1);
 
 --
 -- Índices para tablas volcadas
@@ -235,8 +262,8 @@ ALTER TABLE `detalleticket`
   ADD PRIMARY KEY (`codD`),
   ADD KEY `codTicket` (`codTicket`,`codAsiento`),
   ADD KEY `codAsiento` (`codAsiento`),
-  ADD KEY `codAsiento2` (`codAsiento2`),
-  ADD KEY `codProyeccion` (`codProyeccion`);
+  ADD KEY `codProyeccion` (`codProyeccion`),
+  ADD KEY `codAsiento2` (`codAsiento2`);
 
 --
 -- Indices de la tabla `pelicula`
@@ -273,13 +300,13 @@ ALTER TABLE `ticketcompra`
 -- AUTO_INCREMENT de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `detalleticket`
 --
 ALTER TABLE `detalleticket`
-  MODIFY `codD` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`
@@ -303,7 +330,7 @@ ALTER TABLE `sala`
 -- AUTO_INCREMENT de la tabla `ticketcompra`
 --
 ALTER TABLE `ticketcompra`
-  MODIFY `codTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restricciones para tablas volcadas

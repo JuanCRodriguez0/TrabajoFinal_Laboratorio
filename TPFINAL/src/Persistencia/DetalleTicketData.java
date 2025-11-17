@@ -19,26 +19,41 @@ public class DetalleTicketData {
     }
     
     public void crearDetalleTicket(DetalleTicket detalleTicket) {
-        String sql = "INSERT INTO `detalleticket`(`codProyeccion`, `cant`, `subtotal`, `codTicket`, `codAsiento`, `codAsiento2`) VALUES ( ?, ? , ? ,? , ? , ?)";
+        String sql = "INSERT INTO detalleticket(codProyeccion, codTicket, codAsiento, codAsiento2, estado, total) VALUES (?,?,?,?,?,?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
+            
+            System.out.println("HOLA TOY DENTRO DEL DT");
     
             ps.setInt(1, detalleTicket.getIdProyeccion());
-            ps.setInt(2, detalleTicket.getCant());
-            ps.setDouble(3, detalleTicket.getSubtotal());
-            ps.setInt(4, detalleTicket.getIdTicket());
-            ps.setInt(5, detalleTicket.getCodAsiento());
-            ps.setInt(6, detalleTicket.getCodAsiento2());
+            ps.setInt(2, detalleTicket.getIdTicket());
+            ps.setInt(3, detalleTicket.getCodAsiento());
+            ps.setInt(4, detalleTicket.getCodAsiento2());
+            ps.setBoolean(5,detalleTicket.getEstado());
+            ps.setDouble(6, detalleTicket.getTotal());
             ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println("Error al crear el Detalle de los ticktes solicitados: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de los Detalle de Ticket.");
+        }
 
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    detalleTicket.setCodD(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Detalle del ticket creado con éxito (ID " + detalleTicket.getCodD() + ").");
-                }
-            }
+    }
+    
+    public void crearDetalleTicketP1(DetalleTicket detalleTicket) {
+        String sql = "INSERT INTO detalleticket(codProyeccion, codTicket, codAsiento, estado, total) VALUES (?,?,?,?,?)";
 
+        try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            
+            System.out.println("HOLA TOY DENTRO DEL DT");
+    
+            ps.setInt(1, detalleTicket.getIdProyeccion());
+            ps.setInt(2, detalleTicket.getIdTicket());
+            ps.setInt(3, detalleTicket.getCodAsiento());
+            ps.setBoolean(4,detalleTicket.getEstado());
+            ps.setDouble(5, detalleTicket.getTotal());
+            ps.executeUpdate();
+            
         } catch (SQLException e) {
             System.err.println("Error al crear el Detalle de los ticktes solicitados: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de los Detalle de Ticket.");

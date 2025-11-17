@@ -20,7 +20,7 @@ public class TicketData {
         con = Conexion.getConexion();
     }
 
-    public void crearTicket(Ticket ticket) {
+    public int crearTicket(Ticket ticket) {
         String sql = "INSERT INTO ticketcompra(fechaCompra, codProyeccion, monto, dni, codTicket,estado) VALUES (?,?,?,?,?,?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -37,7 +37,7 @@ public class TicketData {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     ticket.setCodTicket(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Ticket creado con éxito (ID " + ticket.getCodTicket() + ").");
+                    return ticket.getCodProyeccion();
                 }
             }
 
@@ -45,7 +45,7 @@ public class TicketData {
             System.err.println("Error al crear ticket: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ticket.");
         }
-
+        return -1;
     }
 
     public Ticket mostrarTicket(int id) {
@@ -102,4 +102,5 @@ public class TicketData {
         
         return listaTickets;
     }
+    
 }
