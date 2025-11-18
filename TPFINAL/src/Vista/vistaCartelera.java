@@ -57,17 +57,17 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "3D", "Subtitulada", "Duración", "Lugares disp", "Precio", "ID Proyeccion"
+                "Titulo", "3D", "Subtitulada", "Duración", "Lugares disp", "Precio", "ID Proyeccion", "Fecha funcion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -92,9 +92,11 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setPreferredWidth(10);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(30);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(20);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
             jTable1.getColumnModel().getColumn(6).setPreferredWidth(10);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(50);
         }
 
         jButton5.setText("Comprar Tickets");
@@ -477,13 +479,13 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                     tick[t].setFechaCompra(fechaSQL);
                     tick[t].setDniComprador(vistaLogin.user);
                     int idTic = td.crearTicket(tick[t]);
-                    
+                    System.out.println(idTic + " SOY EL ID DE TICKET");
                     
                     dT.setIdProyeccion((int) jTable1.getValueAt(fila, 6));
                     dT.setTotal((double) jTable1.getValueAt(fila, 5));
                     dT.setEstado(true);
                     dT.setCodAsiento(idAsientote);
-                    dT.setCodAsiento2(-1); //-1 indica que está vacío
+                    dT.setCodAsiento2(-1);
                     dT.setIdTicket(idTic);
                     
                     DetalleTicketData dtd = null;
@@ -772,6 +774,7 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
         modelo.addColumn("Lugares disp");
         modelo.addColumn("Precio");
         modelo.addColumn("ID Proyeccion");
+        modelo.addColumn("Fecha funcion");
 
         for (Proyeccion p : cartelera) {
             int horaInicio = Integer.parseInt(p.getHoraInicio().split(":")[0]);
@@ -784,7 +787,7 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
 
             if (p.getEstado()) {
                 modelo.addRow(new Object[]{
-                    p.getTitulo(), p.isEs3D(), p.isSubtitulada(), minutosDuracion, p.getLugaresDisponibles(), p.getPrecioDelLugar(), p.getCodProyeccion()
+                    p.getTitulo(), p.isEs3D(), p.isSubtitulada(), minutosDuracion, p.getLugaresDisponibles(), p.getPrecioDelLugar(), p.getCodProyeccion(), p.getFechaFuncion()
                 });
             }
         }

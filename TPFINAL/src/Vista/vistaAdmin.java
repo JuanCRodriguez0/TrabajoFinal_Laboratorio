@@ -281,11 +281,15 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        jDesktopPane1.repaint();
-        verTicketsAdmin aux = new verTicketsAdmin();
-        aux.setVisible(true);
-        jDesktopPane1.add(aux);
-        jDesktopPane1.moveToFront(aux);
+        try {
+            jDesktopPane1.repaint();
+            verTicketsAdmin aux = new verTicketsAdmin();
+            aux.setVisible(true);
+            jDesktopPane1.add(aux);
+            jDesktopPane1.moveToFront(aux);
+        } catch (Exception e) {
+            System.out.println("ERROR " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton10ActionPerformed
 
 

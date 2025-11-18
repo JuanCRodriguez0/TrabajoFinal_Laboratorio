@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.util.Date;
+
 public class Proyeccion {
     private int codProyeccion;
     private int peliId;
@@ -13,21 +15,23 @@ public class Proyeccion {
     private double precioDelLugar;
     private Boolean estado;
     private String titulo;
+    private Date fechaFuncion;
 
     public Proyeccion() {
     }
 
-    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, String horaInicio, String horaFin, double precioDelLugar, int peliId, int salaId, Boolean estado) {
+    public Proyeccion(String idioma, boolean es3D, boolean subtitulada, String horaInicio, String horaFin, double precioDelLugar, int peliId, int salaId, Boolean estado, Date fechaFuncion) {
         this.idioma = idioma;
         this.es3D = es3D;
         this.subtitulada = subtitulada;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
-        this.lugaresDisponibles = 25;
+        this.lugaresDisponibles = 15;
         this.precioDelLugar = precioDelLugar;
         this.peliId = peliId;
         this.salaId = salaId;
         this.estado = estado;
+        this.fechaFuncion = fechaFuncion;
     }
 
     public Boolean getEstado() {
@@ -127,11 +131,16 @@ public class Proyeccion {
         this.titulo = titulo;
     }
 
-    @Override
-    public String toString() {
-        return "Proyeccion{" + "codProyeccion=" + codProyeccion + ", peliId=" + peliId + ", salaId=" + salaId + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + ", estado=" + estado + '}';
+    public Date getFechaFuncion() {
+        return fechaFuncion;
     }
 
-    
-    
+    public void setFechaFuncion(Date fechaFuncion) {
+        this.fechaFuncion = fechaFuncion;
+    }
+
+    @Override
+    public String toString() {
+        return "Proyeccion{" + "codProyeccion=" + codProyeccion + ", peliId=" + peliId + ", salaId=" + salaId + ", idioma=" + idioma + ", es3D=" + es3D + ", subtitulada=" + subtitulada + ", horaInicio=" + horaInicio + ", horaFin=" + horaFin + ", lugaresDisponibles=" + lugaresDisponibles + ", precioDelLugar=" + precioDelLugar + ", estado=" + estado + ", titulo=" + titulo + ", fechaFuncion=" + fechaFuncion + '}';
+    }
 }

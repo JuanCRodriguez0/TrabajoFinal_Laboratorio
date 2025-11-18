@@ -37,7 +37,7 @@ public class TicketData {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     ticket.setCodTicket(rs.getInt(1));
-                    return ticket.getCodProyeccion();
+                    return ticket.getCodTicket();
                 }
             }
 

@@ -227,7 +227,6 @@ public class modificarUsuario extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Estado");
         modelo.addColumn("DNI");
-
         for (Comprador c : compra) {
             modelo.addRow(new Object[]{
                 c.getNombre(), c.getEstado(), c.getDni()

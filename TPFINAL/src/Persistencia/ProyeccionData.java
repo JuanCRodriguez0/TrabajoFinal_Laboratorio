@@ -20,21 +20,23 @@ public class ProyeccionData {
     }
 
     public void crearFuncion(Proyeccion funcion) {
-
-        String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, nroSala, idPelicula,estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        java.sql.Date fechaSQL = new java.sql.Date(funcion.getFechaFuncion().getTime());
+        
+        String sql = "INSERT INTO proyeccion(idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, nroSala, idPelicula,estado, fechaFuncion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, funcion.getIdioma());
             ps.setBoolean(2, funcion.isEs3D());
             ps.setBoolean(3, funcion.isSubtitulada());
-            ps.setString(4, funcion.getHoraFin());
+            ps.setString(4, funcion.getHoraInicio());
             ps.setString(5, funcion.getHoraFin());
             ps.setInt(6, funcion.getLugaresDisponibles());
             ps.setDouble(7, funcion.getPrecioDelLugar());
             ps.setInt(8, funcion.getSalaId());
             ps.setInt(9, funcion.getPeliId());
-            ps.setBoolean(10, true);
+            ps.setDate(10, fechaSQL);
+            ps.setBoolean(11, true);
 
             ps.executeUpdate();
 
@@ -100,7 +102,7 @@ public class ProyeccionData {
     public List<Proyeccion> listarProyecciones() {
         List<Proyeccion> proys = new ArrayList<>();
 
-        String sql = "SELECT idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, codProyeccion, estado FROM proyeccion";
+        String sql = "SELECT idioma, es3D, subtitulada, horaInicio, horaFin, lugaresDisponibles, precioDelLugar, codProyeccion, estado, fechaFuncion FROM proyeccion";
 
         try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -114,6 +116,7 @@ public class ProyeccionData {
                 proy.setPrecioDelLugar(rs.getDouble("precioDelLugar"));
                 proy.setCodProyeccion(rs.getInt("codProyeccion"));
                 proy.setEstado(rs.getBoolean("estado"));
+                proy.setFechaFuncion(rs.getDate("fechaFuncion"));
                 proys.add(proy);
             }
         } catch (SQLException e) {
@@ -122,11 +125,12 @@ public class ProyeccionData {
         }
         return proys;
     }
+    
 
     public List<Proyeccion> listarCartelera() {
         List<Proyeccion> cartelera = new ArrayList<>();
 
-        String sql = "SELECT es3D, horaFin, horaInicio, subtitulada, estado, titulo, codProyeccion, idioma, lugaresDisponibles, precioDelLugar FROM proyeccion JOIN pelicula ON proyeccion.idPelicula = pelicula.idPelicula AND estado = 1";
+        String sql = "SELECT es3D, horaFin, horaInicio, subtitulada, estado, titulo, codProyeccion, idioma, lugaresDisponibles, precioDelLugar, fechaFuncion FROM proyeccion JOIN pelicula ON proyeccion.idPelicula = pelicula.idPelicula AND estado = 1";
 
         try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -141,6 +145,7 @@ public class ProyeccionData {
                 proye.setEstado(rs.getBoolean("estado"));
                 proye.setTitulo(rs.getString("titulo"));
                 proye.setIdioma(rs.getString("idioma"));
+                proye.setFechaFuncion(rs.getDate("fechaFuncion"));
                 cartelera.add(proye);
             }
         } catch (SQLException e) {
@@ -168,5 +173,29 @@ public class ProyeccionData {
         }
 
         return lugaresOcupados;
+    }
+
+    public Proyeccion getTitulo(int id) {
+        Proyeccion a = new Proyeccion();
+
+        String sql = "SELECT pelicula.titulo, proyeccion.fechaFuncion FROM pelicula JOIN proyeccion ON pelicula.idPelicula = proyeccion.idPelicula WHERE proyeccion.codProyeccion = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            
+            ps.setInt(1, id);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    a.setTitulo(rs.getString("pelicula.titulo"));
+                    a.setFechaFuncion(rs.getDate("proyeccion.fechaFuncion"));
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al listar Proyecciones: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al listar proyecciones: " + e.getMessage());
+        }
+
+        return a;
     }
 }
