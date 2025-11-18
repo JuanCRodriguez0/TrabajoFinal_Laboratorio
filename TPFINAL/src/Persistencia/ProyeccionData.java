@@ -157,7 +157,7 @@ public class ProyeccionData {
 
     public List<Proyeccion> modificarLugaresDisponibles() {
         List<Proyeccion> lugaresOcupados = new ArrayList();
-        String sql = "SELECT COUNT(asiento.codAsiento) lugaresDisp, proyeccion.codProyeccion FROM proyeccion JOIN asiento ON proyeccion.codProyeccion = asiento.codProyeccion GROUP BY proyeccion.codProyeccion";
+        String sql = "SELECT COUNT(asiento.codAsiento) lugaresDisp, proyeccion.codProyeccion FROM proyeccion JOIN asiento ON proyeccion.codProyeccion = asiento.codProyeccion WHERE asiento.estado = 0 GROUP BY proyeccion.codProyeccion";
 
         try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {

@@ -4,6 +4,7 @@ import Modelo.DetalleTicket;
 import Modelo.Pelicula;
 import Modelo.Proyeccion;
 import Modelo.Ticket;
+import Persistencia.AsientoData;
 import Persistencia.DetalleTicketData;
 import Persistencia.PeliculaData;
 import Persistencia.ProyeccionData;
@@ -222,6 +223,14 @@ public class verTicketsAdmin extends javax.swing.JInternalFrame {
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         DetalleTicketData dt = null;
+        Integer asientos[] = new Integer[2];
+        AsientoData ad = null;
+        try {
+            ad = new AsientoData();
+        } catch (Exception e) {
+            System.out.println("ERROR " + e.getMessage());
+        }
+        
         try {
             dt = new DetalleTicketData();
         } catch (Exception e) {
@@ -229,11 +238,14 @@ public class verTicketsAdmin extends javax.swing.JInternalFrame {
         }
         int fila = jTable1.getSelectedRow();
         if(fila != -1){
-            dt.deshabilitarDetalleTicket((int)jTable1.getValueAt(fila, 0));
+            asientos = dt.deshabilitarDetalleTicket((int)jTable1.getValueAt(fila, 0));
             try {
                 tablaTickets();
             } catch (Exception e) {
                 System.out.println("ERROR " + e.getMessage());
+            }
+            for (Integer a : asientos) {
+                ad.habilitarAsiento(a);
             }
         }else{
             JOptionPane.showMessageDialog(null,"Seleccione un ticket para anular.");

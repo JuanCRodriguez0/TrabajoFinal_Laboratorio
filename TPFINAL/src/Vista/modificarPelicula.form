@@ -39,49 +39,47 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="220" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="jLabel10" min="-2" pref="106" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabel11" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="jLabel12" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="jLabel13" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="jLabel14" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="jLabel15" min="-2" pref="110" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="110" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="titulo_JTF" min="-2" pref="227" max="-2" attributes="0"/>
-                              <Component id="director_JTF" min="-2" pref="227" max="-2" attributes="0"/>
-                              <Component id="actores_JTF" min="-2" pref="227" max="-2" attributes="0"/>
-                              <Component id="origen_JTF" min="-2" pref="227" max="-2" attributes="0"/>
-                              <Component id="GeneroComboX" min="-2" pref="227" max="-2" attributes="0"/>
-                              <Component id="estreno_JDC" min="-2" pref="227" max="-2" attributes="0"/>
-                              <Component id="enCartelera_JCB" min="-2" pref="227" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="170" pref="170" max="-2" attributes="0"/>
-                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
                       <Component id="jScrollPane1" min="-2" pref="610" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jButton1" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace min="330" pref="330" max="-2" attributes="0"/>
                           <Component id="jButton4" min="-2" pref="140" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel11" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jLabel10" min="-2" pref="106" max="-2" attributes="0"/>
+                      <Component id="jLabel12" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jLabel13" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jLabel14" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jLabel15" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="110" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="titulo_JTF" min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="director_JTF" min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="actores_JTF" min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="origen_JTF" min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="GeneroComboX" min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="estreno_JDC" min="-2" pref="227" max="-2" attributes="0"/>
+                      <Component id="enCartelera_JCB" min="-2" pref="227" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="33" pref="33" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="170" pref="170" max="-2" attributes="0"/>
+                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -105,38 +103,40 @@
                           <Component id="jLabel16" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="titulo_JTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="director_JTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="actores_JTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel12" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="origen_JTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel13" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="GeneroComboX" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel14" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabel10" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jLabel11" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jLabel12" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jLabel13" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jLabel15" min="-2" pref="24" max="-2" attributes="0"/>
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" pref="24" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="titulo_JTF" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="director_JTF" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="actores_JTF" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="origen_JTF" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="GeneroComboX" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="estreno_JDC" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                  <Component id="enCartelera_JCB" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="estreno_JDC" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel15" min="-2" pref="24" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="enCartelera_JCB" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

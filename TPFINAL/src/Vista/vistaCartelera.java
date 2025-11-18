@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
@@ -485,7 +484,6 @@ public class vistaCartelera extends javax.swing.JInternalFrame {
                     tick[t].setFechaCompra(fechaSQL);
                     tick[t].setDniComprador(vistaLogin.user);
                     int idTic = td.crearTicket(tick[t]);
-                    System.out.println(idTic + " SOY EL ID DE TICKET");
                     
                     dT.setIdProyeccion((int) jTable1.getValueAt(fila, 6));
                     dT.setTotal((double) jTable1.getValueAt(fila, 5));

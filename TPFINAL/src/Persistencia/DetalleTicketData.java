@@ -22,7 +22,7 @@ public class DetalleTicketData {
 
     public void crearDetalleTicket(DetalleTicket detalleTicket) {
         String sql = "INSERT INTO detalleticket(codProyeccion, codTicket, codAsiento, codAsiento2, estado, total) VALUES (?,?,?,?,?,?)";
-        
+
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setInt(1, detalleTicket.getIdProyeccion());
@@ -58,7 +58,6 @@ public class DetalleTicketData {
 
     }
 
-
     public List<DetalleTicket> listarTickets() {
         List<DetalleTicket> listaTickets = new ArrayList();
 
@@ -86,9 +85,9 @@ public class DetalleTicketData {
         String sql = "SELECT ticketcompra.dni, ticketcompra.fechaCompra FROM ticketcompra JOIN detalleticket ON ticketcompra.codTicket = detalleticket.codTicket WHERE detalleticket.codTicket = ?";
         Ticket tic = new Ticket();
 
-        try (PreparedStatement ps = con.prepareStatement(sql) ) {
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, idTicket);
-            try (ResultSet rs = ps.executeQuery() ){
+            try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     tic.setDniComprador(rs.getInt("ticketcompra.dni"));
                     tic.setFechaCompra(rs.getDate("ticketcompra.fechaCompra"));
@@ -101,11 +100,33 @@ public class DetalleTicketData {
         }
         return tic;
     }
-    
-    public void deshabilitarDetalleTicket(int id){
-        String sql = "UPDATE detalleticket SET estado = 0 WHERE codD = ?";
-        
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
+
+
+    public Integer[] deshabilitarDetalleTicket(int id) {
+        Integer[] asientos = new Integer[2];
+
+        String sql1 = "SELECT codAsiento, codAsiento2 FROM detalleticket WHERE codD = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql1)) {
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    asientos[0] = rs.getInt("codAsiento");
+                    asientos[1] = rs.getInt("codAsiento2");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe el detalle con ese ID.");
+                    return asientos;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error SELECT: " + e.getMessage());
+        }
+
+        String sql2 = "UPDATE detalleticket SET estado = 0 WHERE codD = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql2)) {
             ps.setInt(1, id);
             int n = ps.executeUpdate();
             if (n > 0) {
@@ -117,5 +138,7 @@ public class DetalleTicketData {
             System.err.println("Error al deshabilitar DetalleTicket: " + e.getMessage());
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla DetalleTicket.");
         }
+        return asientos;
     }
 }
+

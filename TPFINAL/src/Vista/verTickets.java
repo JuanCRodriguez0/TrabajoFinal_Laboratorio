@@ -132,7 +132,7 @@ public class verTickets extends javax.swing.JInternalFrame {
                     t.getCodTicket(), t.getFechaCompra(), t.getMonto(), t.getDniComprador()
                 });
             } else {
-                JOptionPane.showMessageDialog(null, "Todavía no has comprado ningún ticket.");
+                //JOptionPane.showMessageDialog(null, "Todavía no has comprado ningún ticket.");
             }
         }
         jTable1.setModel(modelo);
