@@ -1,5 +1,5 @@
 # TrabajoFinal_Laboratorio
-# CineCentro 
+# CinemaCentro 
 - Institución: Universidad de La Punta (ULP)
 - Materia: Laboratorio de Programación I
 - Año: 2025
