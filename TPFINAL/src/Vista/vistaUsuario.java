@@ -1,5 +1,7 @@
 package Vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Grupo 11
@@ -29,6 +31,7 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
         botonVerCartelera = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        botonVerTickets.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 14)); // NOI18N
         botonVerTickets.setText("Ver Tickets");
         botonVerTickets.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -36,6 +39,7 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        botonModificarContraseña.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
         botonModificarContraseña.setText("Modificar Contraseña");
         botonModificarContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,13 +47,17 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setText("Volver");
+        jButton5.setBackground(new java.awt.Color(215, 0, 0));
+        jButton5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 14)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
+        jButton5.setText("Cerrar sesión");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
+        botonVerCartelera.setFont(new java.awt.Font("Microsoft JhengHei Light", 1, 14)); // NOI18N
         botonVerCartelera.setText("Ver Cartelera");
         botonVerCartelera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,30 +80,35 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(jLabel1)
-                .addGap(105, 105, 105)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(botonVerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonModificarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonVerCartelera, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton5))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonVerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonVerCartelera, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonModificarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(186, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5)
+                        .addGap(106, 106, 106))))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(botonVerCartelera)
-                .addGap(18, 18, 18)
-                .addComponent(botonVerTickets)
-                .addGap(18, 18, 18)
-                .addComponent(botonModificarContraseña)
-                .addGap(184, 184, 184)
-                .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(botonVerCartelera, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
+                        .addComponent(botonVerTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(botonModificarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)))
                 .addGap(121, 121, 121))
         );
 
@@ -140,7 +153,10 @@ public class vistaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonModificarContraseñaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        this.dispose();
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (opcion == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void botonVerCarteleraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerCarteleraActionPerformed
