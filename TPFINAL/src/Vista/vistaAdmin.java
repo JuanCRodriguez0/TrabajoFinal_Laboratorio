@@ -281,7 +281,11 @@ public class vistaAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
+        jDesktopPane1.repaint();
+        verTicketsAdmin aux = new verTicketsAdmin();
+        aux.setVisible(true);
+        jDesktopPane1.add(aux);
+        jDesktopPane1.moveToFront(aux);
     }//GEN-LAST:event_jButton10ActionPerformed
 
 

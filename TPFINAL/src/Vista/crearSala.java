@@ -65,7 +65,7 @@ public class crearSala extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nro de Sala", "3D", "Capacidad", "Habilitada"
+                "Nro de Sala", "3D", "Capacidad Max.", "Habilitada"
             }
         ) {
             boolean[] canEdit = new boolean [] {

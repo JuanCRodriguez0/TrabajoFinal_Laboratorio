@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2025 a las 21:17:29
+-- Tiempo de generación: 18-11-2025 a las 02:12:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -59,7 +59,8 @@ INSERT INTO `asiento` (`codAsiento`, `fila`, `numero`, `estado`, `codProyeccion`
 (55, 'B', 5, 0, 16),
 (56, 'B', 2, 0, 16),
 (57, 'C', 5, 0, 16),
-(58, 'A', 2, 0, 16);
+(58, 'A', 2, 0, 16),
+(59, 'A', 1, 0, 16);
 
 -- --------------------------------------------------------
 
@@ -82,10 +83,11 @@ CREATE TABLE `comprador` (
 
 INSERT INTO `comprador` (`dni`, `nombre`, `fechaNac`, `password`, `medioDePago`, `estado`) VALUES
 (22222222, 'Facundo Lopez Cozzella', '2000-11-17', 'facundo', 'Efectivo', 0),
-(40400400, 'Jeremias Sirur Flores', '1995-07-14', 'jeremias', 'Tarjeta Credito', 0),
+(38751080, 'Jeremias Sirur Flores', '1995-03-13', '38751080', 'Tarjeta Credito', 0),
+(42238525, 'Agustin Mazza', '2000-04-20', '42238525', 'Tarjeta Credito', 1),
 (42357107, 'Juan Rodriguez', '2000-01-23', 'chester', 'Efectivo', 0),
-(44444222, 'Jeremias Hoyo', '2004-08-05', 'jeremias2', 'Tarjeta Credito', 0),
-(55555555, 'Agustino Mazza', '2000-04-20', 'agustin', 'Tarjeta Credito', 1);
+(44444222, 'Jeremias Hoyo', '2004-08-05', 'jerechikito', 'Tarjeta Credito', 0),
+(44752772, 'Mauricio Reta', '2003-04-13', '44752772', 'Efectivo', 1);
 
 -- --------------------------------------------------------
 
@@ -109,7 +111,8 @@ CREATE TABLE `detalleticket` (
 
 INSERT INTO `detalleticket` (`codD`, `codProyeccion`, `total`, `codTicket`, `codAsiento`, `codAsiento2`, `estado`) VALUES
 (1, 16, 246, 16, 51, 52, 1),
-(9, 16, 123, 16, 58, NULL, 1);
+(9, 16, 123, 16, 58, NULL, 1),
+(10, 16, 123, 16, 59, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +239,8 @@ INSERT INTO `ticketcompra` (`fechaCompra`, `codProyeccion`, `monto`, `dni`, `cod
 ('2025-11-17', 16, 123, 42357107, 23, 1),
 ('2025-11-17', 16, 123, 42357107, 24, 1),
 ('2025-11-17', 16, 123, 42357107, 25, 1),
-('2025-11-17', 16, 123, 42357107, 26, 1);
+('2025-11-17', 16, 123, 42357107, 26, 1),
+('2025-11-17', 16, 123, 42357107, 27, 1);
 
 --
 -- Índices para tablas volcadas
@@ -300,13 +304,13 @@ ALTER TABLE `ticketcompra`
 -- AUTO_INCREMENT de la tabla `asiento`
 --
 ALTER TABLE `asiento`
-  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `codAsiento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `detalleticket`
 --
 ALTER TABLE `detalleticket`
-  MODIFY `codD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `codD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `pelicula`
@@ -330,7 +334,7 @@ ALTER TABLE `sala`
 -- AUTO_INCREMENT de la tabla `ticketcompra`
 --
 ALTER TABLE `ticketcompra`
-  MODIFY `codTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `codTicket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Restricciones para tablas volcadas

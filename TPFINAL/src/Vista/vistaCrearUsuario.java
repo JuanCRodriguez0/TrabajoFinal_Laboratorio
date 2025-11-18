@@ -246,10 +246,12 @@ public class vistaCrearUsuario extends javax.swing.JInternalFrame {
 
             if (contraST.equalsIgnoreCase(contraST2)) {
                 //int dni, String nombre, Date fechaNacimiento, String password, String medioDePago
+                System.out.println("oaaaaa");
                 Comprador comprador = new Comprador(dni, nombre, fechaNac, contraST,medioPagoST, true);
                 CompradorData cp = null;
                 try {
                     cp = new CompradorData();
+                    
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "No se pudo acceder a la base de datos.");
                 }

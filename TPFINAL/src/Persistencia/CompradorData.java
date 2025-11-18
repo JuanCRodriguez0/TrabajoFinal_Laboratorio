@@ -21,7 +21,7 @@ public class CompradorData {
 
     public void crearComprador(Comprador comprador) {
         java.sql.Date fechaSQL = new java.sql.Date(comprador.getFechaNacimiento().getTime());
-        String sql = "INSERT INTO comprador (dni, nombre, fechaNac, password, medioDePago, estado) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO comprador (dni, nombre, fechaNac, password, medioDePago, estado) VALUES (?,?,?,?,?,?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
