@@ -69,7 +69,7 @@ public class verTicketsAdmin extends javax.swing.JInternalFrame {
         }
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel3.setText("Buscar Tickets por fecha");
+        jLabel3.setText("Buscar Tickets por Fecha");
 
         jLabel4.setText("Titulo");
 
