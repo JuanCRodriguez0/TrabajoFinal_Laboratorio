@@ -1,6 +1,18 @@
 # TrabajoFinal_Laboratorio
 # CineCentro 
-**Proyecto Final **
+- Institución: Universidad de La Punta (ULP)
+- Materia: Laboratorio de Programación I
+- Año: 2025
+- Integrantes (comisión 1, grupo 11):
+  
+  - Mauricio Reta
+  - Juan Cruz Rodriguez
+  - Agustín Mazza
+  - Jeremías Hoyo
+  - Facundo Lopez Cozzella
+  - Jeremías Sirur Flores
+  
+
 
 ## Descripción
 Aplicación desktop desarrollada en Java con interfaz Swing para la gestión y venta de entradas en un cine multisala. Incluye cartelera, selección de funciones, mapa de butacas en tiempo real y emisión de tickets.
