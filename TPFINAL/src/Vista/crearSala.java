@@ -230,7 +230,7 @@ public class crearSala extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean test = false;
-        while (comboEstado2.getSelectedIndex() != -1 && comboEstado5.getSelectedIndex() != -1 && buscarDNI1.getText().equals("")) {
+        while (comboEstado2.getSelectedIndex() != -1 && comboEstado5.getSelectedIndex() != -1 && !buscarDNI1.getText().equals("")) {
             int apta3D = comboEstado2.getSelectedIndex();
             boolean isApta3D = true;
 

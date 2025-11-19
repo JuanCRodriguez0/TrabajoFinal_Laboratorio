@@ -35,8 +35,9 @@ public class ProyeccionData {
             ps.setDouble(7, funcion.getPrecioDelLugar());
             ps.setInt(8, funcion.getSalaId());
             ps.setInt(9, funcion.getPeliId());
-            ps.setDate(10, fechaSQL);
-            ps.setBoolean(11, true);
+            ps.setBoolean(10, true);
+            ps.setDate(11, fechaSQL);
+            
 
             ps.executeUpdate();
 
